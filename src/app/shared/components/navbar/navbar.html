@@ -1,1 +1,110 @@
-<p>navbar works!</p>
+<div class="header">
+  <nav class="navbar navbar-dark bg-dark">
+
+
+    <div class="container-fluid">
+      <!-- Logo Game Again -->
+      <img src="img/imgLogo.png" alt="Logo Game Again" class="logo" />
+
+      <!-- Tasto di ricerca -->
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
+        <button class="btn btn-success" type="submit">Cerca</button>
+      </form>
+      
+    </div>
+
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        Categorie
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Game Again</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+
+            <!-- Dropdown Playstation -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Playstation
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-dark">
+
+                <li><a class="dropdown-item" href="#">Playstation 1</a></li>
+                <li><a class="dropdown-item" href="#">Playstation 2</a></li>
+                <li><a class="dropdown-item" href="#">Playstation 3</a></li>
+                <li><a class="dropdown-item" href="#">Playstation 4</a></li>
+                
+              </ul>
+
+            </li>
+
+            <!-- Dropdown Nintendo -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Nintendo
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-dark">
+
+                <li><a class="dropdown-item" href="#">GameBoy</a></li>
+                <li><a class="dropdown-item" href="#">GameBoy Advance</a></li>
+                <li><a class="dropdown-item" href="#">Nintendo DS/3DS</a></li>
+                <li><a class="dropdown-item" href="#">Nintendo Switch</a></li>
+
+              </ul>
+              
+            </li>
+
+            <!-- Dropdown Carte collezionabili -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Carte collezionabili
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-dark">
+
+                <li><a class="dropdown-item" href="#">Pokemon</a></li>
+                <li><a class="dropdown-item" href="#">Varie</a></li>
+
+              </ul>
+              
+            </li>
+
+            <!-- Pulsante diretto Miniature/Oggettistica da collezione -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Miniature/Oggettistica da collezione
+              </a>
+
+              <!-- <ul class="dropdown-menu dropdown-menu-dark">
+
+                <li><a class="dropdown-item" href="#">Pokemon</a></li>
+                <li><a class="dropdown-item" href="#">Varie</a></li>
+
+              </ul> -->
+              
+            </li>
+          </ul>
+
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+</div>

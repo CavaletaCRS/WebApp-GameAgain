@@ -1,0 +1,33 @@
+.container-fluid {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.logo {
+  display: block;
+  width: min(40%, 350px);
+  height: auto;
+  margin-left: 0;
+}
+
+form {
+  display: flex;
+  margin-left: auto;
+}
+
+.header {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 7vw, 4rem);
+  }
+
+  p {
+    max-width: 650px;
+    line-height: 1.6;
+  }
+}
