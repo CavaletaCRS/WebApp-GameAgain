@@ -17,6 +17,21 @@ form {
   margin-left: auto;
 }
 
+.offcanvas-search {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: 0;
+
+  .form-control {
+    width: min(220px, 55vw);
+  }
+
+  .btn {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
+
 .header {
   width: min(100% - 2rem, 1200px);
   margin-inline: auto;

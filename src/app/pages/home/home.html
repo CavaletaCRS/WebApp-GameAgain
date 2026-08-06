@@ -1,35 +1,54 @@
-<section class="home">
+<section class="home" >
 
    <p>
     Scopri gli ultimi arrivi e trova il prossimo titolo per la tua
     collezione.
   </p>
 
-  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <div class="showcase-grid">
+    <div #carouselElement id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
 
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000">
-        <img src="img/ps1-Asteroids.png" class="d-block w-100" alt="...">
+      <div class="carousel-inner">
+        <div
+          *ngFor="let photo of photos; let first = first"
+          class="carousel-item"
+          [class.active]="first"
+        >
+          <img [src]="photo.src" class="d-block w-100" [alt]="photo.alt">
+        </div>
       </div>
-      <div class="carousel-item" data-bs-interval="2000">
-        <img src="img/ps1-CrashBandicootWarped.png" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="img/ps1-Toonenstein.png" class="d-block w-100" alt="...">
-      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Precedente</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Successivo</span>
+      </button>
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Precedente</span>
-    </button>
+    <fieldset class="promo-card">
+      <!-- <legend>Dai un'occhiata ai nostri prodotti!</legend> -->
 
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Successivo</span>
-    </button>
+      <img src="img/sfondo_testi.png" alt="Logo Game Again" class="logo" />
+
+
+      <!-- <ul style="item-align: center; padding: 0;">
+
+        <li><a class="dropdown-item" href="#">Giochi</a></li>
+        <li><a class="dropdown-item" href="#">Console</a></li>
+        <li><a class="dropdown-item" href="#">Controller e accessori</a></li>
+        <li><a class="dropdown-item" href="#">Miniature/Oggettistica da collezione</a></li>
+        <li><a class="dropdown-item" href="#">Carte collezionabili</a></li>
+
+      </ul> -->
+      
+    </fieldset>
 
   </div>
+
 
  
 </section>

@@ -3,21 +3,66 @@
   margin-inline: auto;
   padding-block: 2rem;
 
-  #carouselExampleInterval {
-    width: min(100%, 600px);
-    aspect-ratio: 1;
-    margin-inline: auto;
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+    gap: 1rem;
+    height: clamp(520px, 62vw, 720px);
   }
 
-  .carousel-inner,
+  #carouselExampleInterval {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-radius: 3%;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 22%);
+  }
+
+  .carousel-inner {
+    height: 100%;
+    border-radius: 3%;
+    overflow: hidden;
+  }
+
   .carousel-item {
     height: 100%;
   }
 
   .carousel-item img {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: fill;
+  }
+
+  .promo-card {
+    min-width: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    // border: 2px solid #212529;
+    border-radius: 1rem;
+    background: #f4f4f4;
+    box-shadow: 0 10px 28px rgb(0 0 0 / 22%);
+
+    .logo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    legend {
+      float: none;
+      width: auto;
+      margin: 0;
+      padding-inline: 0.5rem;
+      font-size: clamp(1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      text-align: center;
+    }
   }
 
   .carousel-control-prev,
@@ -51,6 +96,22 @@
   .carousel-control-next-icon {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  @media (max-width: 767px) {
+    .showcase-grid {
+      display: flex;
+      height: auto;
+      flex-direction: column;
+    }
+
+    #carouselExampleInterval {
+      aspect-ratio: 4 / 5;
+    }
+
+    .promo-card {
+      min-height: 220px;
+    }
   }
 
   @media (max-width: 480px) {

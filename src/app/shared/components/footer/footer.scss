@@ -1,0 +1,39 @@
+.footer {
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 7vw, 4rem);
+  }
+
+  p {
+    max-width: 650px;
+    line-height: 1.6;
+  }
+}
+
+.logo {
+  display: block;
+  width: min(40%, 350px);
+  height: auto;
+  margin-left: 0;
+}
+
+h5{
+ color: white; 
+ text-align: left; 
+ margin-left: 1rem;  
+ margin-top: 5%;
+}
+
+.copyright-row {
+  width: 100%;
+  margin: 1rem 0 0;
+  color: white;
+  text-align: center;
+}
+
+.social-link {
+  text-decoration: none;
+}
