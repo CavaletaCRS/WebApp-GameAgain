@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { NgFor } from '@angular/common';
+import {
+  CarouselGame,
+  CarouselGamecard,
+} from '../../shared/components/carousel-gamecard/carousel-gamecard/carousel-gamecard';
 
 interface BootstrapCarouselInstance {
   cycle(): void;
@@ -17,7 +21,7 @@ declare const bootstrap: {
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor],
+  imports: [NgFor, CarouselGamecard],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -31,6 +35,45 @@ export class Home implements AfterViewInit, OnDestroy {
     { src: 'img/foto_console.png', alt: 'Console per videogiochi' },
     { src: 'img/foto_nostalgia.png', alt: 'Videogiochi nostalgici' },
     { src: 'img/foto_promo.png', alt: 'Promozioni Game Again' }
+  ];
+
+  featuredGames: CarouselGame[] = [
+    {
+      title: 'Asteroids',
+      condition: 'Usato',
+      price: '24,99 €',
+      image: 'img/ps1-Asteroids.png',
+    },
+    {
+      title: 'Crash Bandicoot Warped',
+      condition: 'Usato',
+      price: '34,99 €',
+      image: 'img/ps1-CrashBandicootWarped.png',
+    },
+    {
+      title: 'Toonenstein',
+      condition: 'Usato',
+      price: '19,99 €',
+      image: 'img/ps1-Toonenstein.png',
+    },
+    {
+      title: 'Asteroids',
+      condition: 'Usato',
+      price: '24,99 €',
+      image: 'img/ps1-Asteroids.png',
+    },
+    {
+      title: 'Crash Bandicoot Warped',
+      condition: 'Usato',
+      price: '34,99 €',
+      image: 'img/ps1-CrashBandicootWarped.png',
+    },
+    {
+      title: 'Toonenstein',
+      condition: 'Usato',
+      price: '19,99 €',
+      image: 'img/ps1-Toonenstein.png',
+    },
   ];
 
   ngAfterViewInit(): void {

@@ -1,0 +1,41 @@
+<section
+  class="games-carousel"
+  aria-label="Videogiochi in evidenza"
+  (mouseenter)="stopAutoplay()"
+  (mouseleave)="startAutoplay()"
+>
+  <button
+    class="carousel-arrow carousel-arrow--previous"
+    type="button"
+    aria-label="Mostra i giochi precedenti"
+    (click)="scroll(-1)"
+  >
+    &#8249;
+  </button>
+
+  <div #cardTrack class="card-track">
+    <article class="game-card" *ngFor="let game of games">
+      <div class="game-card__image-wrap">
+        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title">
+      </div>
+
+      <div class="game-card__content">
+        <h3>{{ game.title }} <span>({{ game.condition }})</span></h3>
+        <p class="game-card__price">{{ game.price }}</p>
+        <button class="game-card__cart" type="button">
+          <span aria-hidden="true">&#128722;</span>
+          Aggiungi al carrello
+        </button>
+      </div>
+    </article>
+  </div>
+
+  <button
+    class="carousel-arrow carousel-arrow--next"
+    type="button"
+    aria-label="Mostra altri giochi"
+    (click)="scroll(1)"
+  >
+    &#8250;
+  </button>
+</section>
