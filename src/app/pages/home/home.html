@@ -68,5 +68,17 @@
     <app-carousel-gamecard [games]="featuredGames"></app-carousel-gamecard>
   </div>
 
- 
+  <hr>
+
+  <nav class="category-navigation" aria-label="Categorie prodotti">
+    <ul class="category-list">
+      <li *ngFor="let category of categories">
+        <a class="category-link" [href]="category.link">
+          <img class="category-icon" [src]="category.icon" alt="">
+          <span>{{ category.name }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
 </section>

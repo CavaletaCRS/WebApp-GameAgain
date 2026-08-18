@@ -76,6 +76,34 @@ export class Home implements AfterViewInit, OnDestroy {
     },
   ];
 
+  categories = [
+    {
+      name: 'Giochi',
+      icon: 'img/IconSet_GamesAllPlatforms.svg',
+      link: '#',
+    },
+    {
+      name: 'Console',
+      icon: 'img/IconSet_Playstation5Consoles.svg',
+      link: '#',
+    },
+    {
+      name: 'Controller e accessori',
+      icon: 'img/IconSet_PlayStationAccessoriesGeneric.svg',
+      link: '#',
+    },
+    {
+      name: 'Miniature e oggettistica',
+      icon: 'img/icons8-preferiti-50.png',
+      link: '#',
+    },
+    {
+      name: 'Carte collezionabili',
+      icon: 'img/icons8-puntatore-50.png',
+      link: '#',
+    },
+  ];
+
   ngAfterViewInit(): void {
     this.carousel = bootstrap.Carousel.getOrCreateInstance(this.carouselElement.nativeElement, {
       interval: 5000,
