@@ -1,9 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild
+  } from '@angular/core';
 import { NgFor } from '@angular/common';
 import {
   CarouselGame,
   CarouselGamecard,
 } from '../../shared/components/carousel-gamecard/carousel-gamecard/carousel-gamecard';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../service/product.service';
 
 interface BootstrapCarouselInstance {
   cycle(): void;
@@ -25,11 +29,24 @@ declare const bootstrap: {
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home implements AfterViewInit, OnDestroy {
+
+export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('carouselElement') carouselElement!: ElementRef<HTMLElement>;
 
   private carousel?: BootstrapCarouselInstance;
+  private productService = inject(ProductService);
+
+  products: Product[] = [];
+
+  constructor() {
+    this.productService = inject(ProductService);
+  }
+
+  async ngOnInit() {
+    this.products = await this.productService.getProducts();
+    console.log('Prodotti recuperati:', this.products);
+  }
 
   photos = [
     { src: 'img/foto_console.png', alt: 'Console per videogiochi' },
