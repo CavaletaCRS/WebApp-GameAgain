@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+/* I componenti caricati dal router sono elementi HTML personalizzati e devono
+   comportarsi come contenitori a tutta larghezza. */
+router-outlet + * {
+  display: block;
+  width: 100%;
+}

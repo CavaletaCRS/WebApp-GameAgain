@@ -1,5 +1,10 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
 .footer {
-  width: min(100% - 2rem, 1200px);
+  width: min(100% - 2rem);
   margin-inline: auto;
 
   h1 {
@@ -22,7 +27,7 @@
 
 h5{
  color: white; 
- text-align: left; 
+ text-align: center; 
  margin-left: 1rem;  
  margin-top: 5%;
 }

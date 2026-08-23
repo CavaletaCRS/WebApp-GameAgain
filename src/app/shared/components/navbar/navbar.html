@@ -14,12 +14,19 @@
       
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid category-navigation">
 
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
         Categorie
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <div class="category-shortcuts" aria-label="Categorie principali">
+        <a class="category-button" routerLink="/playstation" routerLinkActive="active">Playstation</a>
+        <a class="category-button" routerLink="/nintendo" routerLinkActive="active">Nintendo</a>
+        <a class="category-button" routerLink="/carte-collezionabili" routerLinkActive="active">Carte collezionabili</a>
+        <a class="category-button" routerLink="/miniature-oggettistica" routerLinkActive="active">Oggettistica/Action figure</a>
+      </div>
 
       <div class="offcanvas offcanvas-top text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         
@@ -33,7 +40,7 @@
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">Home</a>
             </li>
 
             <!-- Dropdown Playstation -->
@@ -44,10 +51,10 @@
 
               <ul class="dropdown-menu dropdown-menu-dark">
 
-                <li><a class="dropdown-item" href="#">Playstation 1</a></li>
-                <li><a class="dropdown-item" href="#">Playstation 2</a></li>
-                <li><a class="dropdown-item" href="#">Playstation 3</a></li>
-                <li><a class="dropdown-item" href="#">Playstation 4</a></li>
+                <li><a class="dropdown-item" routerLink="/playstation/ps1" routerLinkActive="active" data-bs-dismiss="offcanvas">Playstation 1</a></li>
+                <li><a class="dropdown-item" routerLink="/playstation/ps2" routerLinkActive="active" data-bs-dismiss="offcanvas">Playstation 2</a></li>
+                <li><a class="dropdown-item" routerLink="/playstation/ps3" routerLinkActive="active" data-bs-dismiss="offcanvas">Playstation 3</a></li>
+                <li><a class="dropdown-item" routerLink="/playstation/ps4" routerLinkActive="active" data-bs-dismiss="offcanvas">Playstation 4</a></li>
                 
               </ul>
 
@@ -61,10 +68,10 @@
 
               <ul class="dropdown-menu dropdown-menu-dark">
 
-                <li><a class="dropdown-item" href="#">GameBoy</a></li>
-                <li><a class="dropdown-item" href="#">GameBoy Advance</a></li>
-                <li><a class="dropdown-item" href="#">Nintendo DS/3DS</a></li>
-                <li><a class="dropdown-item" href="#">Nintendo Switch</a></li>
+                <li><a class="dropdown-item" routerLink="/nintendo/gameboy" routerLinkActive="active" data-bs-dismiss="offcanvas">GameBoy</a></li>
+                <li><a class="dropdown-item" routerLink="/nintendo/gameboy-advance" routerLinkActive="active" data-bs-dismiss="offcanvas">GameBoy Advance</a></li>
+                <li><a class="dropdown-item" routerLink="/nintendo/ds-3ds" routerLinkActive="active" data-bs-dismiss="offcanvas">Nintendo DS/3DS</a></li>
+                <li><a class="dropdown-item" routerLink="/nintendo/switch" routerLinkActive="active" data-bs-dismiss="offcanvas">Nintendo Switch</a></li>
 
               </ul>
               
@@ -78,26 +85,18 @@
 
               <ul class="dropdown-menu dropdown-menu-dark">
 
-                <li><a class="dropdown-item" href="#">Pokemon</a></li>
-                <li><a class="dropdown-item" href="#">Varie</a></li>
+                <li><a class="dropdown-item" routerLink="/carte-collezionabili/pokemon" routerLinkActive="active" data-bs-dismiss="offcanvas">Pokemon</a></li>
+                <li><a class="dropdown-item" routerLink="/carte-collezionabili/varie" routerLinkActive="active" data-bs-dismiss="offcanvas">Varie</a></li>
 
               </ul>
               
             </li>
 
             <!-- Pulsante diretto Miniature/Oggettistica da collezione -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/miniature-oggettistica" routerLinkActive="active" data-bs-dismiss="offcanvas">
                 Miniature/Oggettistica da collezione
               </a>
-
-              <!-- <ul class="dropdown-menu dropdown-menu-dark">
-
-                <li><a class="dropdown-item" href="#">Pokemon</a></li>
-                <li><a class="dropdown-item" href="#">Varie</a></li>
-
-              </ul> -->
-              
             </li>
           </ul>
 
