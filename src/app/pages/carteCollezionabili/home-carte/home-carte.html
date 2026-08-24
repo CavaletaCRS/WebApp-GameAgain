@@ -1,1 +1,59 @@
-<p>home-carte works!</p>
+<section class="home-carte" >
+
+    <div>
+
+        <div class="promo-text">
+            
+            <h2>
+                <strong>Gli ultimi arrivi Carte Collezionabili</strong>
+            </h2>
+
+            <p>
+            Scopri gli ultimi arrivi e trova la prossima carta per la tua
+            collezione!
+            </p>
+
+        </div>
+
+        <div style="margin-top: 2%;">
+            <app-carousel-gamecard [games]="featuredGames"></app-carousel-gamecard>
+        </div>
+
+    </div>
+
+    <div style="margin-top: 5%;">
+        <div class="promo-text">
+            
+            <h2>
+            <strong>Pokèmon</strong>
+            </h2>
+            <hr>
+
+        </div>
+
+        <div style="margin-top: 2%;">
+            <app-carousel-gamecard [games]="featuredGames"></app-carousel-gamecard>
+        </div>
+
+    </div>
+
+
+    <div style="margin-top: 5%;">
+
+        <div class="promo-text">
+            
+            <h2>
+                <strong>Varie</strong>
+            </h2>
+            <hr>
+
+        </div>
+
+        <div style="margin-top: 2%;">
+            <app-carousel-gamecard [games]="featuredGames"></app-carousel-gamecard>
+        </div>
+
+    </div>   
+
+</section>
+
