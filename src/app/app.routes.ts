@@ -116,6 +116,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'chisiamo',
+    title: 'Chi siamo',
+    loadComponent: () =>
+      import('./pages/chiSiamo/chi-siamo/chi-siamo').then(
+        (component) => component.ChiSiamo,
+      ),
+  },
+  {
     path: '**',
     title: 'Pagina non trovata - Game Again',
     loadComponent: () =>

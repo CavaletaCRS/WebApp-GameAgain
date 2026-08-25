@@ -3,24 +3,39 @@
     <div class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- Logo Game Again -->
-            <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">
+                <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
+            </a>
         
         </div>
 
         <div class="col-4">
-                <a class="social-link" href="https://www.instagram.com/gameagain_/" target="_blank" rel="noopener noreferrer">
-                <h5>Contatti</h5>
-            </a>
+                
+            <h5>Contatti</h5>
+            
+            <div class="social-links">
+                <p style="color: #fff;">EMAIL: info@gameagain.it</p>
+                <p style="color: #fff;">TELEFONO: +39 123 456 789</p>
+            </div>
+
         </div>
 
         <div class="col-4">
-            <a class="social-link" href="https://www.instagram.com/gameagain_/" target="_blank" rel="noopener noreferrer">
-                <h5>Seguici su</h5>
-            </a>
+            <h5>Seguici su:</h5>
+
+            <div class="social-links">
+                <a class="social-link" href="https://www.vinted.it/member/157222740" target="_blank" rel="noopener noreferrer" aria-label="Game Again su Vinted">
+                    <img src="img/Logo-vinted.png" alt="Vinted" class="social-icon" />
+                </a>
+
+                <a class="social-link" href="https://www.subito.it/utente/112615163" target="_blank" rel="noopener noreferrer" aria-label="Game Again su Subito">
+                    <img src="img/market-new.svg" alt="Subito" class="social-icon" />
+                </a>
+            </div>
         </div>
 
         <div class="col-4">
-            <a class="social-link" href="https://www.instagram.com/gameagain_/" target="_blank" rel="noopener noreferrer">
+            <a class="social-link" routerLink="/chisiamo">
                 <h5>Chi siamo</h5>
             </a>
         </div>

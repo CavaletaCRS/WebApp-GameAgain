@@ -1,0 +1,46 @@
+.chi-siamo {
+  display: flex;
+  justify-content: center;
+  width: min(100% - 2rem, 1100px);
+  margin: 2rem auto;
+}
+
+.chi-siamo__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  color: #fff;
+  background-color: #212529;
+  border-radius: 0.75rem;
+}
+
+.chi-siamo__text {
+  width: min(100%, 800px);
+  text-align: center;
+}
+
+.chi-siamo__text h1,
+.chi-siamo__text h2 {
+  margin-bottom: 1rem;
+}
+
+.chi-siamo__text p {
+  line-height: 1.7;
+}
+
+.chi-siamo__text ul {
+  display: inline-block;
+  margin: 0 auto 1rem;
+  padding-left: 1.5rem;
+  text-align: left;
+}
+
+.chi-siamo__image {
+  display: block;
+  width: min(100%, 700px);
+  height: auto;
+  margin-top: 2rem;
+  border-radius: 0.75rem;
+}

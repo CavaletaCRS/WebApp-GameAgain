@@ -4,8 +4,9 @@
 
     <div class="container-fluid">
       <!-- Logo Game Again -->
-      <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
-
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">
+        <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
+      </a>
       <!-- Tasto di ricerca -->
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>

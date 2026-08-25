@@ -40,5 +40,24 @@ h5{
 }
 
 .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  display: block;
+  width: auto;
+  height: 2.5rem;
+  max-width: 8rem;
+  object-fit: contain;
 }

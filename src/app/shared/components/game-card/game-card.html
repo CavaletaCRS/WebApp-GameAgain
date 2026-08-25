@@ -1,1 +1,16 @@
-<p>game-card works!</p>
+ <div #cardTrack class="card-track">
+    <article class="game-card" *ngFor="let game of games">
+      <div class="game-card__image-wrap">
+        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title">
+      </div>
+
+      <div class="game-card__content">
+        <h3>{{ game.title }} <span>({{ game.condition }})</span></h3>
+        <p class="game-card__price">{{ game.price }}</p>
+        <button class="game-card__cart" type="button">
+          <span aria-hidden="true">&#128722;</span>
+          Aggiungi al carrello
+        </button>
+      </div>
+    </article>
+  </div>
