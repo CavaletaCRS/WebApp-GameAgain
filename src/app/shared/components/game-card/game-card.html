@@ -1,16 +1,27 @@
- <div #cardTrack class="card-track">
-    <article class="game-card" *ngFor="let game of games">
-      <div class="game-card__image-wrap">
-        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title">
-      </div>
+<div class="products-grid">
+  @for (game of paginatedGames; track game.title + game.image) {
+    <article class="game-card">
+      <button class="game-card__image-wrap" type="button" [attr.aria-label]="'Apri i dettagli di ' + game.title" (click)="openProductDialog(game)">
+        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      </button>
 
       <div class="game-card__content">
-        <h3>{{ game.title }} <span>({{ game.condition }})</span></h3>
+        <h2>{{ game.title }} <span>({{ game.condition }})</span></h2>
         <p class="game-card__price">{{ game.price }}</p>
-        <button class="game-card__cart" type="button">
-          <span aria-hidden="true">&#128722;</span>
-          Aggiungi al carrello
-        </button>
+        <button class="game-card__cart" type="button"><span aria-hidden="true">&#128722;</span> Aggiungi al carrello</button>
       </div>
     </article>
-  </div>
+  }
+</div>
+
+@if (totalPages > 1) {
+  <nav class="pagination" aria-label="Pagine dei prodotti">
+    <button type="button" aria-label="Pagina precedente" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">&lsaquo;</button>
+    @for (page of pages; track page) {
+      <button type="button" [class.pagination__page--active]="page === currentPage" [attr.aria-current]="page === currentPage ? 'page' : null" [attr.aria-label]="'Vai alla pagina ' + page" (click)="goToPage(page)">{{ page }}</button>
+    }
+    <button type="button" aria-label="Pagina successiva" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">&rsaquo;</button>
+  </nav>
+}
+
+<app-product-dialog [product]="selectedGame"></app-product-dialog>

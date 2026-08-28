@@ -1,1 +1,16 @@
-<p>play2 works!</p>
+<section class="play2-page">
+  <header class="play2-header">
+    <h1>PlayStation 2</h1>
+    <p>Trova il tuo titolo preferito da aggiungere alla tua collezione!</p>
+  </header>
+
+  @if (loading) {
+    <p class="status-message" aria-live="polite">Caricamento prodotti...</p>
+  } @else if (loadError) {
+    <p class="status-message status-message--error" role="alert">Non è stato possibile caricare i prodotti. Riprova più tardi.</p>
+  } @else if (gamesPlayStation2.length === 0) {
+    <p class="status-message">Al momento non ci sono prodotti PlayStation 2 disponibili.</p>
+  } @else {
+    <app-game-card [games]="gamesPlayStation2" [productsPerPage]="20"></app-game-card>
+  }
+</section>

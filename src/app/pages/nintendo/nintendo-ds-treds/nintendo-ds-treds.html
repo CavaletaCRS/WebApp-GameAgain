@@ -1,1 +1,7 @@
-<p>nintendo-ds-treds works!</p>
+<section class="product-page">
+  <header class="product-page__header"><h1>Nintendo DS e 3DS</h1><p>Trova il tuo titolo preferito da aggiungere alla tua collezione!</p></header>
+  @if (loading) { <p class="status-message" aria-live="polite">Caricamento prodotti...</p>
+  } @else if (loadError) { <p class="status-message status-message--error" role="alert">Non è stato possibile caricare i prodotti. Riprova più tardi.</p>
+  } @else if (games.length === 0) { <p class="status-message">Al momento non ci sono prodotti Nintendo DS o 3DS disponibili.</p>
+  } @else { <app-game-card [games]="games" [productsPerPage]="20"></app-game-card> }
+</section>

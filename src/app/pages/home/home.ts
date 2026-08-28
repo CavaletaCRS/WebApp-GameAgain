@@ -43,10 +43,6 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     this.productService = inject(ProductService);
   }
 
-  async ngOnInit() {
-    this.products = await this.productService.getProducts();
-    console.log('Prodotti recuperati:', this.products);
-  }
 
   photos = [
     { src: 'img/foto_console.png', alt: 'Console per videogiochi' },
@@ -54,45 +50,9 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     { src: 'img/foto_promo.png', alt: 'Promozioni Game Again' }
   ];
 
-  featuredGames: CarouselGame[] = [
-    {
-      title: 'Asteroids',
-      condition: 'Usato',
-      price: '24,99 €',
-      image: 'img/ps1-Asteroids.png',
-    },
-    {
-      title: 'Crash Bandicoot Warped',
-      condition: 'Usato',
-      price: '34,99 €',
-      image: 'img/ps1-CrashBandicootWarped.png',
-    },
-    {
-      title: 'Toonenstein',
-      condition: 'Usato',
-      price: '19,99 €',
-      image: 'img/ps1-Toonenstein.png',
-    },
-    {
-      title: 'Asteroids',
-      condition: 'Usato',
-      price: '24,99 €',
-      image: 'img/ps1-Asteroids.png',
-    },
-    {
-      title: 'Crash Bandicoot Warped',
-      condition: 'Usato',
-      price: '34,99 €',
-      image: 'img/ps1-CrashBandicootWarped.png',
-    },
-    {
-      title: 'Toonenstein',
-      condition: 'Usato',
-      price: '19,99 €',
-      image: 'img/ps1-Toonenstein.png',
-    },
-  ];
+  featuredGames: CarouselGame[] = [];
 
+  
   categories = [
     {
       name: 'Giochi',
@@ -114,12 +74,61 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
       icon: 'img/cuore_logo.png',
       link: '#',
     },
-    {
-      name: 'Carte collezionabili',
-      icon: 'img/poke_logo.png',
-      link: '#',
-    },
+    // {
+    //   name: 'Carte collezionabili',
+    //   icon: 'img/poke_logo.png',
+    //   link: '#',
+    // },
   ];
+
+  async ngOnInit(): Promise<void> {
+
+    const products = await this.productService.getProducts();
+ 
+    
+    this.featuredGames = products.map(product => ({
+      title: product.name,
+      condition: product.condition,
+      price: this.formatPrice(product.price),
+      image: this.resolveImagePath(product.image),
+      description: product.description,
+    }));
+    console.log('Prodotti recuperati:', this.featuredGames);
+
+  }
+
+   private formatPrice(price: number | string | null | undefined): string {
+    const numericPrice = Number(price);
+
+    if (price == null || !Number.isFinite(numericPrice)) {
+      return 'Prezzo non disponibile';
+    }
+
+    return numericPrice.toLocaleString('it-IT', {
+      style: 'currency',
+      currency: 'EUR',
+    });
+  }
+
+  private resolveImagePath(image: string): string {
+    const path = image.trim().replaceAll('\\', '/');
+    const driveFileId = path.match(
+      /^https?:\/\/drive\.google\.com\/file\/d\/([^/?]+)/i
+    )?.[1];
+
+    if (driveFileId) {
+      return `https://lh3.googleusercontent.com/d/${driveFileId}=w1200`;
+    }
+
+    if (/^(https?:|data:|blob:)/i.test(path)) {
+      return path;
+    }
+
+    return `/${path
+      .replace(/^\.\//, '')
+      .replace(/^public\//, '')
+      .replace(/^\/+/, '')}`;
+  }
 
   ngAfterViewInit(): void {
     this.carousel = bootstrap.Carousel.getOrCreateInstance(this.carouselElement.nativeElement, {

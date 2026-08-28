@@ -1,30 +1,21 @@
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../../../service/product.service';
-import { CarouselGame } from '../../../shared/components/carousel-gamecard/carousel-gamecard/carousel-gamecard';
-import { GameCard } from '../../../shared/components/game-card/game-card';
+import { ChangeDetectorRef, Directive, inject } from '@angular/core';
+import { ProductFilters } from '../models/product.model';
+import { ProductService } from '../service/product.service';
+import { CarouselGame } from './components/carousel-gamecard/carousel-gamecard/carousel-gamecard';
 
-@Component({
-  selector: 'app-play2',
-  imports: [GameCard],
-  templateUrl: './play2.html',
-  styleUrl: './play2.scss',
-})
-export class Play2 implements OnInit {
+@Directive()
+export abstract class ProductListingPage {
   private readonly productService = inject(ProductService);
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  gamesPlayStation2: CarouselGame[] = [];
+  games: CarouselGame[] = [];
   loading = true;
   loadError = false;
 
-  async ngOnInit(): Promise<void> {
+  protected async loadProducts(filters: ProductFilters): Promise<void> {
     try {
-      const products = await this.productService.getProducts({
-        brand: 'Playstation',
-        platform: 'Playstation 2',
-      });
-
-      this.gamesPlayStation2 = products.map(product => ({
+      const products = await this.productService.getProducts(filters);
+      this.games = products.map(product => ({
         title: product.name,
         condition: product.condition,
         price: this.formatPrice(product.price),

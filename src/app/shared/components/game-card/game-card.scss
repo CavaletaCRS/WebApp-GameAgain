@@ -1,0 +1,20 @@
+:host { display: block; }
+.products-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+.game-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #d9dde2; border-radius: 1rem; background: #fff; box-shadow: 0 4px 12px rgb(0 0 0 / 7%); }
+.game-card__image-wrap { display: grid; min-height: 260px; margin: .75rem .75rem 0; padding: .5rem; place-items: center; border: 0; border-radius: .5rem; background: #f4f5f6; cursor: pointer; }
+.game-card__image-wrap:hover .game-card__image { transform: scale(1.03); }
+.game-card__image-wrap:focus-visible { outline: 3px solid rgb(255 79 10 / 35%); outline-offset: 2px; }
+.game-card__image { display: block; width: 100%; height: 260px; object-fit: contain; transition: transform 180ms ease; }
+.game-card__content { display: flex; flex: 1; flex-direction: column; padding: .9rem; }
+.game-card__content h2 { margin: 0; color: #25282b; font-size: 1.05rem; font-weight: 500; line-height: 1.35; }
+.game-card__content h2 span { white-space: nowrap; }
+.game-card__price { margin: .6rem 0 .85rem; color: #25282b; font-size: 1.1rem; font-weight: 700; }
+.game-card__cart { width: 100%; margin-top: auto; padding: .75rem 1rem; border: 0; border-radius: .5rem; background: #ff4f0a; color: #fff; font-weight: 700; cursor: pointer; }
+.game-card__cart:hover { background: #e74400; }
+.pagination { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 2.5rem; }
+.pagination button { min-width: 2.75rem; height: 2.75rem; border: 1px solid #d9dde2; border-radius: .5rem; background: #fff; color: #25282b; font-weight: 700; cursor: pointer; }
+.pagination button:hover:not(:disabled), .pagination button.pagination__page--active { border-color: #ff4f0a; background: #ff4f0a; color: #fff; }
+.pagination button:disabled { cursor: not-allowed; opacity: .4; }
+@media (max-width: 1050px) { .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 750px) { .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .products-grid { grid-template-columns: 1fr; } }

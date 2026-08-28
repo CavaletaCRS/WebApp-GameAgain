@@ -1,67 +1,43 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CarouselGame } from '../carousel-gamecard/carousel-gamecard/carousel-gamecard';
+import { ProductDialog } from '../product-dialog/product-dialog';
 
 @Component({
   selector: 'app-game-card',
-  imports: [NgFor],
+  imports: [ProductDialog],
   templateUrl: './game-card.html',
   styleUrl: './game-card.scss',
 })
 export class GameCard {
-    @ViewChild('cardTrack') private cardTrack!: ElementRef<HTMLElement>;
+  @ViewChild(ProductDialog) private productDialog!: ProductDialog;
 
   @Input() games: CarouselGame[] = [];
-  @Input() autoplayInterval = 4000;
+  @Input() productsPerPage = 20;
 
-  private autoplayTimer?: ReturnType<typeof setInterval>;
+  selectedGame?: CarouselGame;
+  currentPage = 1;
 
-  ngAfterViewInit(): void {
-    this.startAutoplay();
+  get paginatedGames(): CarouselGame[] {
+    const firstProduct = (this.currentPage - 1) * this.productsPerPage;
+    return this.games.slice(firstProduct, firstProduct + this.productsPerPage);
   }
 
-  ngOnDestroy(): void {
-    this.stopAutoplay();
+  get totalPages(): number {
+    return Math.ceil(this.games.length / this.productsPerPage);
   }
 
-  startAutoplay(): void {
-    this.stopAutoplay();
-
-    if (this.autoplayInterval <= 0) {
-      return;
-    }
-
-    this.autoplayTimer = setInterval(() => this.scroll(1), this.autoplayInterval);
-  }
-  scroll(arg0: number) {
-    throw new Error('Method not implemented.');
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
   }
 
-  stopAutoplay(): void {
-    if (this.autoplayTimer) {
-      clearInterval(this.autoplayTimer);
-      this.autoplayTimer = undefined;
-    }
+  openProductDialog(game: CarouselGame): void {
+    this.selectedGame = game;
+    this.productDialog.open();
   }
 
-  // scroll(direction: -1 | 1): void {
-  //   const track = this.cardTrack.nativeElement;
-  //   const card = track.querySelector<HTMLElement>('.game-card');
-  //   const gap = 16;
-  //   const distance = card ? card.offsetWidth + gap : track.clientWidth;
-  //   const reachedEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
-  //   const reachedStart = track.scrollLeft <= 1;
-
-  //   if (direction === 1 && reachedEnd) {
-  //     track.scrollTo({ left: 0, behavior: 'smooth' });
-  //     return;
-  //   }
-
-  //   if (direction === -1 && reachedStart) {
-  //     track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
-  //     return;
-  //   }
-
-  //   track.scrollBy({ left: direction * distance, behavior: 'smooth' });
-  // }
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+    this.currentPage = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

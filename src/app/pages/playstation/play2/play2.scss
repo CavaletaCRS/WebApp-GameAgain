@@ -1,0 +1,9 @@
+:host { display: block; }
+
+.play2-page { width: min(1400px, calc(100% - 2rem)); margin: 0 auto; padding: 4rem 0; }
+.play2-header { margin-bottom: 2rem; text-align: center; }
+.play2-header h1 { margin: 0; color: #25282b; font-size: clamp(2rem, 5vw, 3.25rem); }
+.play2-header p { margin: .75rem 0 0; color: #62676d; font-size: 1.1rem; }
+
+.status-message { padding: 3rem 1rem; color: #62676d; text-align: center; }
+.status-message--error { color: #b42318; }
