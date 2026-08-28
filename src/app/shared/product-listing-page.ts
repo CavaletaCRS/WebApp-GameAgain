@@ -13,6 +13,9 @@ export abstract class ProductListingPage {
   loadError = false;
 
   protected async loadProducts(filters: ProductFilters): Promise<void> {
+    this.loading = true;
+    this.loadError = false;
+
     try {
       const products = await this.productService.getProducts(filters);
       this.games = products.map(product => ({

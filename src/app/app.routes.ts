@@ -24,6 +24,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'cerca',
+    title: 'Ricerca prodotti - Game Again',
+    loadComponent: () =>
+      import('./pages/search-results/search-results').then(
+        (component) => component.SearchResults,
+      ),
+  },
+  {
     path: 'playstation/ps1',
     title: 'PlayStation 1 - Game Again',
     loadComponent: () =>

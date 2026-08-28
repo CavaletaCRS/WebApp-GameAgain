@@ -1,0 +1,18 @@
+<section class="product-page">
+  <header class="product-page__header">
+    <h1>Risultati della ricerca</h1>
+    @if (query) { <p>Risultati per “{{ query }}”</p> }
+  </header>
+
+  @if (loading) {
+    <p class="status-message" aria-live="polite">Ricerca in corso...</p>
+  } @else if (loadError) {
+    <p class="status-message status-message--error" role="alert">Non è stato possibile cercare i prodotti. Riprova più tardi.</p>
+  } @else if (!query) {
+    <p class="status-message">Inserisci un termine da cercare.</p>
+  } @else if (games.length === 0) {
+    <p class="status-message">Nessun prodotto trovato per “{{ query }}”.</p>
+  } @else {
+    <app-game-card [games]="games" [productsPerPage]="8"></app-game-card>
+  }
+</section>

@@ -18,11 +18,19 @@ export class ProductService {
     const platform = filters.platform?.trim();
     const category = filters.category?.trim();
     const brand = filters.brand?.trim();
+    const search = filters.search?.trim().toLocaleLowerCase('it-IT');
 
     return products.filter(product =>
       (!platform || product.platform === platform) &&
       (!category || product.category === category) &&
-      (!brand || product.brand === brand)
+      (!brand || product.brand === brand) &&
+      (!search || [
+        product.name,
+        product.brand,
+        product.platform,
+        product.category,
+        product.description,
+      ].some(value => value?.toLocaleLowerCase('it-IT').includes(search)))
     );
   }
 

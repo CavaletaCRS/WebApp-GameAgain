@@ -16,4 +16,5 @@ export interface ProductFilters {
   platform?: string;
   category?: string;
   brand?: string;
+  search?: string;
 }

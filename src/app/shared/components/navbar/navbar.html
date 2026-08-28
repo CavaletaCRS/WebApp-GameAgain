@@ -8,8 +8,8 @@
         <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
       </a>
       <!-- Tasto di ricerca -->
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
+      <form class="d-flex" role="search" (ngSubmit)="search(desktopSearch.value)">
+        <input #desktopSearch class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca prodotti" required/>
         <button class="btn btn-success" type="submit">Cerca</button>
       </form>
       
@@ -101,9 +101,9 @@
             </li>
           </ul>
 
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success" type="submit">Search</button>
+          <form class="d-flex mt-3" role="search" (ngSubmit)="search(mobileSearch.value)">
+            <input #mobileSearch class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca prodotti" required>
+            <button class="btn btn-success" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
           </form>
 
         </div>
