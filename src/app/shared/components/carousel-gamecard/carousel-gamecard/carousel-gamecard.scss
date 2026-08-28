@@ -39,12 +39,29 @@
 
 .game-card__image-wrap {
   display: grid;
+  width: calc(100% - 1.5rem);
   min-height: 260px;
   margin: 0.75rem 0.75rem 0;
   padding: 0.5rem;
   place-items: center;
+  border: 0;
   border-radius: 0.5rem;
   background: #f4f5f6;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease;
+
+  &:hover {
+    background: #e9ebed;
+
+    .game-card__image {
+      transform: scale(1.03);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgb(255 79 10 / 35%);
+    outline-offset: 2px;
+  }
 }
 
 .game-card__image {
@@ -52,6 +69,7 @@
   width: 100%;
   height: 260px;
   object-fit: contain;
+  transition: transform 180ms ease;
 }
 
 .game-card__content {

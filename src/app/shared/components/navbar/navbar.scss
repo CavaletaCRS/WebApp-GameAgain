@@ -38,7 +38,7 @@ form {
 }
 
 .header {
-  width: min(100% - 2rem);
+  width: min(100% - 2rem, 1400px);
   margin-inline: auto;
 
   h1 {

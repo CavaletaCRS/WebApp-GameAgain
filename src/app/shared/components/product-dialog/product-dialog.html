@@ -1,0 +1,41 @@
+<dialog
+  #dialog
+  class="product-dialog"
+  aria-labelledby="product-dialog-title"
+  (click)="closeFromBackdrop($event)"
+>
+  <button
+    class="product-dialog__close"
+    type="button"
+    aria-label="Chiudi i dettagli del prodotto"
+    (click)="close()"
+  >
+    &times;
+  </button>
+
+  @if (product) {
+    <div class="product-dialog__layout">
+      <div class="product-dialog__image-wrap">
+        <img
+          class="product-dialog__image"
+          [src]="product.image"
+          [alt]="'Immagine di ' + product.title"
+          referrerpolicy="no-referrer"
+        >
+      </div>
+
+      <div class="product-dialog__content">
+        <p class="product-dialog__condition">{{ product.condition }}</p>
+        <h2 id="product-dialog-title">{{ product.title }}</h2>
+        <p class="product-dialog__description">
+          {{ product.description || 'Scopri questo prodotto selezionato da Game Again. Contattaci per maggiori informazioni e dettagli.' }}
+        </p>
+        <p class="product-dialog__price">{{ product.price }}</p>
+        <button class="product-dialog__buy" type="button">
+          <span aria-hidden="true">&#128722;</span>
+          Acquista
+        </button>
+      </div>
+    </div>
+  }
+</dialog>

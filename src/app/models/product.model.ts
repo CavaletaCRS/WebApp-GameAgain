@@ -9,4 +9,11 @@ export interface Product {
   available: boolean;
   image: string;
   link: string;
+  description?: string;
+}
+
+export interface ProductFilters {
+  platform?: string;
+  category?: string;
+  brand?: string;
 }

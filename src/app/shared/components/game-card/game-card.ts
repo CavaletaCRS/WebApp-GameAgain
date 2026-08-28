@@ -1,9 +1,10 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { NgFor } from '@angular/common';
 import { CarouselGame } from '../carousel-gamecard/carousel-gamecard/carousel-gamecard';
 
 @Component({
   selector: 'app-game-card',
-  imports: [],
+  imports: [NgFor],
   templateUrl: './game-card.html',
   styleUrl: './game-card.scss',
 })
@@ -64,4 +65,3 @@ export class GameCard {
   //   track.scrollBy({ left: direction * distance, behavior: 'smooth' });
   // }
 }
-

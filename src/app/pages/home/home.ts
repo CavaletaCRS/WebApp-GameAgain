@@ -96,27 +96,27 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   categories = [
     {
       name: 'Giochi',
-      icon: 'img/IconSet_GamesAllPlatforms.svg',
+      icon: 'img/cd_logo.png',
       link: '#',
     },
     {
       name: 'Console',
-      icon: 'img/IconSet_Playstation5Consoles.svg',
+      icon: 'img/console_logo.png',
       link: '#',
     },
     {
       name: 'Controller e accessori',
-      icon: 'img/IconSet_PlayStationAccessoriesGeneric.svg',
+      icon: 'img/controller_logo.png',
       link: '#',
     },
     {
       name: 'Miniature e oggettistica',
-      icon: 'img/icons8-preferiti-50.png',
+      icon: 'img/cuore_logo.png',
       link: '#',
     },
     {
       name: 'Carte collezionabili',
-      icon: 'img/icons8-puntatore-50.png',
+      icon: 'img/poke_logo.png',
       link: '#',
     },
   ];

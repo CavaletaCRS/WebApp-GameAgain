@@ -7,27 +7,37 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { ProductDialog } from '../../product-dialog/product-dialog';
 
 export interface CarouselGame {
   title: string;
   condition: string;
   price: string;
   image: string;
+  description?: string;
 }
 
 @Component({
   selector: 'app-carousel-gamecard',
-  imports: [NgFor],
+  imports: [NgFor, ProductDialog],
   templateUrl: './carousel-gamecard.html',
   styleUrl: './carousel-gamecard.scss',
 })
 export class CarouselGamecard implements AfterViewInit, OnDestroy {
   @ViewChild('cardTrack') private cardTrack!: ElementRef<HTMLElement>;
+  @ViewChild(ProductDialog) private productDialog!: ProductDialog;
 
   @Input() games: CarouselGame[] = [];
   @Input() autoplayInterval = 4000;
 
   private autoplayTimer?: ReturnType<typeof setInterval>;
+  selectedGame?: CarouselGame;
+
+  openProductDialog(game: CarouselGame): void {
+    this.selectedGame = game;
+    this.stopAutoplay();
+    this.productDialog.open();
+  }
 
   ngAfterViewInit(): void {
     this.startAutoplay();

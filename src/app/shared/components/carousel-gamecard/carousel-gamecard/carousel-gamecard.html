@@ -15,9 +15,22 @@
 
   <div #cardTrack class="card-track">
     <article class="game-card" *ngFor="let game of games">
-      <div class="game-card__image-wrap">
-        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title">
-      </div>
+      <button
+        class="game-card__image-wrap"
+        type="button"
+        [attr.aria-label]="'Apri i dettagli di ' + game.title"
+        (click)="openProductDialog(game)"
+      >
+        <img
+          class="game-card__image"
+          [src]="game.image"
+          [alt]="'Copertina di ' + game.title"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          referrerpolicy="no-referrer"
+        >
+      </button>
 
       <div class="game-card__content">
         <h3>{{ game.title }} <span>({{ game.condition }})</span></h3>
@@ -39,3 +52,5 @@
     &#8250;
   </button>
 </section>
+
+<app-product-dialog [product]="selectedGame"></app-product-dialog>
