@@ -94,10 +94,23 @@
   <nav class="category-navigation" aria-label="Categorie prodotti">
     <ul class="category-list">
       <li *ngFor="let category of categories">
-        <a class="category-link" [href]="category.link">
-          <img class="category-icon" [src]="category.icon" alt="">
-          <span>{{ category.name }}</span>
-        </a>
+        @if (category.disabled) {
+          <span
+            class="category-link category-link--disabled"
+            data-tooltip="Disponibili prossimamente"
+            aria-label="Disponibili prossimamente"
+            aria-disabled="true"
+            tabindex="0"
+          >
+            <img class="category-icon" [src]="category.icon" alt="">
+            <span>{{ category.name }}</span>
+          </span>
+        } @else {
+          <a class="category-link" [routerLink]="category.link">
+            <img class="category-icon" [src]="category.icon" alt="">
+            <span>{{ category.name }}</span>
+          </a>
+        }
       </li>
     </ul>
   </nav>

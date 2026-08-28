@@ -16,6 +16,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'giochi',
+    title: 'Giochi - Game Again',
+    loadComponent: () =>
+      import('./pages/all-games/all-games').then(
+        (component) => component.AllGames,
+      ),
+  },
+  {
     path: 'playstation/ps1',
     title: 'PlayStation 1 - Game Again',
     loadComponent: () =>

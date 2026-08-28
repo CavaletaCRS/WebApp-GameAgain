@@ -1,8 +1,8 @@
 <div class="products-grid">
-  @for (game of paginatedGames; track game.title + game.image) {
+  @for (game of paginatedGames; track game.title + game.image; let index = $index) {
     <article class="game-card">
       <button class="game-card__image-wrap" type="button" [attr.aria-label]="'Apri i dettagli di ' + game.title" (click)="openProductDialog(game)">
-        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        <img class="game-card__image" [src]="game.image" [alt]="'Copertina di ' + game.title" [attr.loading]="index < 4 ? 'eager' : 'lazy'" [attr.fetchpriority]="index < 4 ? 'high' : 'auto'" decoding="async" referrerpolicy="no-referrer" (load)="imageLoaded($event)">
       </button>
 
       <div class="game-card__content">

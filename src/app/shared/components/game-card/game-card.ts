@@ -35,6 +35,10 @@ export class GameCard {
     this.productDialog.open();
   }
 
+  imageLoaded(event: Event): void {
+    (event.currentTarget as HTMLImageElement).classList.add('is-loaded');
+  }
+
   goToPage(page: number): void {
     if (page < 1 || page > this.totalPages || page === this.currentPage) return;
     this.currentPage = page;

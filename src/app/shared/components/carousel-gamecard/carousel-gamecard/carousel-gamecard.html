@@ -14,7 +14,7 @@
   </button>
 
   <div #cardTrack class="card-track">
-    <article class="game-card" *ngFor="let game of games">
+    <article class="game-card" *ngFor="let game of games; let index = index">
       <button
         class="game-card__image-wrap"
         type="button"
@@ -25,8 +25,8 @@
           class="game-card__image"
           [src]="game.image"
           [alt]="'Copertina di ' + game.title"
-          loading="eager"
-          fetchpriority="high"
+          [attr.loading]="index < 3 ? 'eager' : 'lazy'"
+          [attr.fetchpriority]="index < 3 ? 'high' : 'auto'"
           decoding="async"
           referrerpolicy="no-referrer"
         >

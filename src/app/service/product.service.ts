@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   collection,
-  getDocs,
-  query,
-  QueryConstraint,
-  where
+  getDocs
 } from 'firebase/firestore';
 
 import { db } from '../app.config';
@@ -14,29 +11,34 @@ import { Product, ProductFilters } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
+  private productsRequest?: Promise<Product[]>;
 
   async getProducts(filters: ProductFilters = {}): Promise<Product[]> {
-    const productsCollection = collection(db, 'products');
-    const constraints: QueryConstraint[] = [];
+    const products = await this.getAllProducts();
+    const platform = filters.platform?.trim();
+    const category = filters.category?.trim();
+    const brand = filters.brand?.trim();
 
-    if (filters.platform?.trim()) {
-      constraints.push(where('platform', '==', filters.platform.trim()));
+    return products.filter(product =>
+      (!platform || product.platform === platform) &&
+      (!category || product.category === category) &&
+      (!brand || product.brand === brand)
+    );
+  }
+
+  private getAllProducts(): Promise<Product[]> {
+    if (!this.productsRequest) {
+      this.productsRequest = getDocs(collection(db, 'products'))
+        .then(snapshot => snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Product[])
+        .catch(error => {
+          this.productsRequest = undefined;
+          throw error;
+        });
     }
 
-    if (filters.category?.trim()) {
-      constraints.push(where('category', '==', filters.category.trim()));
-    }
-
-    if (filters.brand?.trim()) {
-      constraints.push(where('brand', '==', filters.brand.trim()));
-    }
-
-    const productsQuery = query(productsCollection, ...constraints);
-    const snapshot = await getDocs(productsQuery);
-
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    })) as Product[];
+    return this.productsRequest;
   }
 }

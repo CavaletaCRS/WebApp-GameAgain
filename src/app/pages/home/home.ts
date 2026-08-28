@@ -1,7 +1,8 @@
 import {
-  AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild
+  AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, OnInit, ViewChild
   } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import {
   CarouselGame,
   CarouselGamecard,
@@ -25,7 +26,7 @@ declare const bootstrap: {
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, CarouselGamecard],
+  imports: [NgFor, RouterLink, CarouselGamecard],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -36,6 +37,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   private carousel?: BootstrapCarouselInstance;
   private productService = inject(ProductService);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   products: Product[] = [];
 
@@ -57,22 +59,24 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     {
       name: 'Giochi',
       icon: 'img/cd_logo.png',
-      link: '#',
+      link: '/giochi',
     },
     {
       name: 'Console',
       icon: 'img/console_logo.png',
       link: '#',
+      disabled: true,
     },
     {
       name: 'Controller e accessori',
       icon: 'img/controller_logo.png',
       link: '#',
+      disabled: true,
     },
     {
       name: 'Miniature e oggettistica',
       icon: 'img/cuore_logo.png',
-      link: '#',
+      link: '/miniature-oggettistica',
     },
     // {
     //   name: 'Carte collezionabili',
@@ -93,6 +97,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
       image: this.resolveImagePath(product.image),
       description: product.description,
     }));
+    this.changeDetectorRef.markForCheck();
     console.log('Prodotti recuperati:', this.featuredGames);
 
   }
@@ -117,7 +122,7 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     )?.[1];
 
     if (driveFileId) {
-      return `https://lh3.googleusercontent.com/d/${driveFileId}=w1200`;
+      return `https://lh3.googleusercontent.com/d/${driveFileId}=w600`;
     }
 
     if (/^(https?:|data:|blob:)/i.test(path)) {

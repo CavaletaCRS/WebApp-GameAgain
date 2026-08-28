@@ -39,7 +39,7 @@ export abstract class ProductListingPage {
   private resolveImagePath(image: string): string {
     const path = image.trim().replaceAll('\\', '/');
     const driveFileId = path.match(/^https?:\/\/drive\.google\.com\/file\/d\/([^/?]+)/i)?.[1];
-    if (driveFileId) return `https://lh3.googleusercontent.com/d/${driveFileId}=w1200`;
+    if (driveFileId) return `https://lh3.googleusercontent.com/d/${driveFileId}=w600`;
     if (/^(https?:|data:|blob:)/i.test(path)) return path;
     return `/${path.replace(/^\.\//, '').replace(/^public\//, '').replace(/^\/+/, '')}`;
   }

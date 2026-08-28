@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import {
   CarouselGame,
   CarouselGamecard,
@@ -14,6 +14,7 @@ import { ProductService } from '../../../service/product.service';
 export class HomePlay {
 
   private readonly productService = inject(ProductService);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
   featuredGames: CarouselGame[] = [];
   gamesPlayStation1: CarouselGame[] = [];
@@ -76,6 +77,8 @@ export class HomePlay {
       description: product.description,
     }));
 
+    this.changeDetectorRef.markForCheck();
+
     console.log('Featured Games:', this.featuredGames);
   }
 
@@ -99,7 +102,7 @@ export class HomePlay {
     )?.[1];
 
     if (driveFileId) {
-      return `https://lh3.googleusercontent.com/d/${driveFileId}=w1200`;
+      return `https://lh3.googleusercontent.com/d/${driveFileId}=w600`;
     }
 
     if (/^(https?:|data:|blob:)/i.test(path)) {

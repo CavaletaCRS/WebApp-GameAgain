@@ -1,26 +1,9 @@
-<section class="home-carte" >
-
-    <div>
-
-        <div class="promo-text">
-            
-            <h2>
-                <strong>Gli ultimi arrivi</strong>
-            </h2>
-
-            <p>
-            Scopri gli ultimi arrivi e trova il tuo prossimo pezzo per la tua
-            collezione!
-            </p>
-
-        </div>
-
-        <div style="margin-top: 2%;">
-            <app-carousel-gamecard [games]="featuredGames"></app-carousel-gamecard>
-        </div>
-
-    </div>
-    
+<section class="product-page">
+  <header class="product-page__header"><h1>Miniature ed Oggettistica</h1><p>Trova il tuo personaggio preferito da aggiungere alla tua collezione!</p></header>
+  @if (loading) { <p class="status-message" aria-live="polite">Caricamento prodotti...</p>
+  } @else if (loadError) { <p class="status-message status-message--error" role="alert">Non è stato possibile caricare i prodotti. Riprova più tardi.</p>
+  } @else if (games.length === 0) { <p class="status-message">Al momento non ci sono prodotti Miniature ed Oggettistica disponibili.</p>
+  } @else { <app-game-card [games]="games" [productsPerPage]="20"></app-game-card> }
 </section>
 
 
