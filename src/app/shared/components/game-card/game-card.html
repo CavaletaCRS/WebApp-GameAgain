@@ -8,7 +8,7 @@
       <div class="game-card__content">
         <h2>{{ game.title }} <span>({{ game.condition }})</span></h2>
         <p class="game-card__price">{{ game.price }}</p>
-        <button class="game-card__cart" type="button"><span aria-hidden="true">&#128722;</span> Aggiungi al carrello</button>
+        <button class="game-card__cart" type="button" (click)="addToCart(game)"><span aria-hidden="true">&#128722;</span> Aggiungi al carrello</button>
       </div>
     </article>
   }

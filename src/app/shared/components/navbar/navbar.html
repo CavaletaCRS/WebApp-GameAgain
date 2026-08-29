@@ -2,31 +2,52 @@
   <nav class="navbar navbar-dark bg-dark">
 
 
-    <div class="container-fluid">
+    <div class="container-fluid navbar-main">
       <!-- Logo Game Again -->
       <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
       </a>
       <!-- Tasto di ricerca -->
-      <form class="d-flex" role="search" (ngSubmit)="search(desktopSearch.value)">
+      <form class="d-flex desktop-search" role="search" (ngSubmit)="search(desktopSearch.value)">
         <input #desktopSearch class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca prodotti" required/>
         <button class="btn btn-success" type="submit">Cerca</button>
       </form>
+
+      <div class="navbar-actions" aria-label="Azioni utente">
+        <a class="action-link" routerLink="/profilo" routerLinkActive="active" aria-label="Profilo utente">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.52 0-10 2.24-10 5v3h20v-3c0-2.76-4.48-5-10-5Z" />
+          </svg>
+          <span class="action-label">Profilo</span>
+        </a>
+
+        <a class="action-link cart-link" routerLink="/carrello" routerLinkActive="active" aria-label="Carrello">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2ZM1 2v2h2l3.6 7.59-1.35 2.45A2 2 0 0 0 7 17h12v-2H7.42a.25.25 0 0 1-.22-.37L8.1 13h7.45a2 2 0 0 0 1.75-1.03L20.88 5H5.21l-.94-2H1Zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2Z" />
+          </svg>
+          <span class="action-label">Carrello</span>
+          @if (cartService.itemCount() > 0) {
+            <span class="cart-badge" [attr.aria-label]="cartService.itemCount() + ' prodotti nel carrello'">{{ cartService.itemCount() }}</span>
+          }
+        </a>
+      </div>
       
     </div>
 
     <div class="container-fluid category-navigation">
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
-        Categorie
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="category-controls">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+          Categorie
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="category-shortcuts" aria-label="Categorie principali">
-        <a class="category-button" routerLink="/playstation" routerLinkActive="active">Playstation</a>
-        <a class="category-button" routerLink="/nintendo" routerLinkActive="active">Nintendo</a>
-        <!-- <a class="category-button" routerLink="/carte-collezionabili" routerLinkActive="active">Carte collezionabili</a> -->
-        <a class="category-button" routerLink="/miniature-oggettistica" routerLinkActive="active">Oggettistica/Action figure</a>
+        <div class="category-shortcuts" aria-label="Categorie principali">
+          <a class="category-button" routerLink="/playstation" routerLinkActive="active">Playstation</a>
+          <a class="category-button" routerLink="/nintendo" routerLinkActive="active">Nintendo</a>
+          <!-- <a class="category-button" routerLink="/carte-collezionabili" routerLinkActive="active">Carte collezionabili</a> -->
+          <a class="category-button" routerLink="/miniature-oggettistica" routerLinkActive="active">Oggettistica/Action figure</a>
+        </div>
       </div>
 
       <div class="offcanvas offcanvas-top text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -112,4 +133,11 @@
   </nav>
   
 </div>
+@if (cartService.notification(); as message) {
+  <div class="cart-toast" role="status" aria-live="polite">
+    <span class="cart-toast__icon" aria-hidden="true">&#10003;</span>
+    <span>{{ message }}</span>
+    <button type="button" aria-label="Chiudi la notifica" (click)="cartService.dismissNotification()">&times;</button>
+  </div>
+}
 <!-- <hr style="border: 1px solid #212429; margin: 0;"> -->

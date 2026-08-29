@@ -140,6 +140,18 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'profilo',
+    title: 'Profilo - Game Again',
+    loadComponent: () =>
+      import('./pages/profilo/profilo').then((component) => component.Profilo),
+  },
+  {
+    path: 'carrello',
+    title: 'Carrello - Game Again',
+    loadComponent: () =>
+      import('./pages/carrello/carrello').then((component) => component.Carrello),
+  },
+  {
     path: '**',
     title: 'Pagina non trovata - Game Again',
     loadComponent: () =>

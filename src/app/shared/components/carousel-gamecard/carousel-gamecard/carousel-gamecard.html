@@ -35,7 +35,7 @@
       <div class="game-card__content">
         <h3>{{ game.title }} <span>({{ game.condition }})</span></h3>
         <p class="game-card__price">{{ game.price }}</p>
-        <button class="game-card__cart" type="button">
+        <button class="game-card__cart" type="button" (click)="addToCart(game)">
           <span aria-hidden="true">&#128722;</span>
           Aggiungi al carrello
         </button>

@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { CarouselGame } from '../carousel-gamecard/carousel-gamecard/carousel-gamecard';
 import { ProductDialog } from '../product-dialog/product-dialog';
+import { CartService } from '../../../service/cart.service';
 
 @Component({
   selector: 'app-game-card',
@@ -9,6 +10,8 @@ import { ProductDialog } from '../product-dialog/product-dialog';
   styleUrl: './game-card.scss',
 })
 export class GameCard {
+  constructor(private readonly cartService: CartService) {}
+
   @ViewChild(ProductDialog) private productDialog!: ProductDialog;
 
   @Input() games: CarouselGame[] = [];
@@ -33,6 +36,10 @@ export class GameCard {
   openProductDialog(game: CarouselGame): void {
     this.selectedGame = game;
     this.productDialog.open();
+  }
+
+  addToCart(game: CarouselGame): void {
+    this.cartService.add(game);
   }
 
   imageLoaded(event: Event): void {

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { ProductDialog } from '../../product-dialog/product-dialog';
+import { CartService } from '../../../../service/cart.service';
 
 export interface CarouselGame {
   title: string;
@@ -24,6 +25,8 @@ export interface CarouselGame {
   styleUrl: './carousel-gamecard.scss',
 })
 export class CarouselGamecard implements AfterViewInit, OnDestroy {
+  constructor(private readonly cartService: CartService) {}
+
   @ViewChild('cardTrack') private cardTrack!: ElementRef<HTMLElement>;
   @ViewChild(ProductDialog) private productDialog!: ProductDialog;
 
@@ -37,6 +40,10 @@ export class CarouselGamecard implements AfterViewInit, OnDestroy {
     this.selectedGame = game;
     this.stopAutoplay();
     this.productDialog.open();
+  }
+
+  addToCart(game: CarouselGame): void {
+    this.cartService.add(game);
   }
 
   ngAfterViewInit(): void {

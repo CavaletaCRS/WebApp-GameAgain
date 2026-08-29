@@ -31,9 +31,9 @@
           {{ product.description || 'Scopri questo prodotto selezionato da Game Again. Contattaci per maggiori informazioni e dettagli.' }}
         </p>
         <p class="product-dialog__price">{{ product.price }}</p>
-        <button class="product-dialog__buy" type="button">
+        <button class="product-dialog__buy" type="button" (click)="addToCart()">
           <span aria-hidden="true">&#128722;</span>
-          Acquista
+          Aggiungi al carrello
         </button>
       </div>
     </div>

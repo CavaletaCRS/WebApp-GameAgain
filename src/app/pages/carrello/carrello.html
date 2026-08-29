@@ -1,0 +1,48 @@
+<section class="page-shell">
+  <p class="eyebrow">I tuoi acquisti</p>
+  <h1>Carrello</h1>
+
+  @if (cartService.items().length === 0) {
+    <div class="empty-state">
+      <span class="cart-icon" aria-hidden="true">&#128722;</span>
+      <h2>Il carrello è vuoto</h2>
+      <p>Esplora il catalogo e aggiungi i tuoi giochi preferiti.</p>
+      <a class="catalog-button" routerLink="/">Vai alla Home</a>
+      <a class="catalog-button" routerLink="/giochi">Vai ai giochi</a>
+      <a class="catalog-button" routerLink="/miniature-oggettistica">Vai alle figure</a>
+    </div>
+  } @else {
+    <div class="cart-layout">
+      <div class="cart-list" aria-label="Prodotti nel carrello">
+        @for (item of cartService.items(); track item.key) {
+          <article class="cart-item">
+            <img [src]="item.image" [alt]="'Immagine di ' + item.title">
+            <div class="cart-item__details">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.condition }}</p>
+              <strong>{{ item.unitPrice | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+            </div>
+            <!-- <div class="quantity" aria-label="Quantità">
+              <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity - 1)" [attr.aria-label]="'Riduci quantità di ' + item.title">&minus;</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity + 1)" [attr.aria-label]="'Aumenta quantità di ' + item.title">&plus;</button>
+            </div> -->
+            <strong class="item-total">{{ item.unitPrice * item.quantity | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+            <button class="remove-button" type="button" (click)="cartService.remove(item.key)">Rimuovi</button>
+          </article>
+        }
+      </div>
+
+      <aside class="cart-summary">
+        <h2>Riepilogo</h2>
+        <div class="summary-row"><span>Prodotti</span><span>{{ cartService.itemCount() }}</span></div>
+        <div class="summary-row summary-total">
+          <span>Totale</span>
+          <strong>{{ cartService.total() | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+        </div>
+        <button class="checkout-button" type="button">Procedi all'acquisto</button>
+        <button class="clear-button" type="button" (click)="cartService.clear()">Svuota il carrello</button>
+      </aside>
+    </div>
+  }
+</section>

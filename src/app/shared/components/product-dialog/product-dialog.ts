@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CarouselGame } from '../carousel-gamecard/carousel-gamecard/carousel-gamecard';
+import { CartService } from '../../../service/cart.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -8,6 +9,8 @@ import { CarouselGame } from '../carousel-gamecard/carousel-gamecard/carousel-ga
   styleUrl: './product-dialog.scss',
 })
 export class ProductDialog {
+  constructor(private readonly cartService: CartService) {}
+
   @ViewChild('dialog') private dialog?: ElementRef<HTMLDialogElement>;
 
   @Input() product?: CarouselGame;
@@ -22,6 +25,12 @@ export class ProductDialog {
 
   close(): void {
     this.dialog?.nativeElement.close();
+  }
+
+  addToCart(): void {
+    if (!this.product) return;
+    this.cartService.add(this.product);
+    this.close();
   }
 
   closeFromBackdrop(event: MouseEvent): void {
