@@ -6,5 +6,53 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
+
+    match /users/{userId} {
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.keys().hasOnly([
+          'id', 'email', 'nome', 'cognome', 'createdAt', 'ultimoAccesso'
+        ])
+        && request.resource.data.id == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.ultimoAccesso == request.time
+        && request.resource.data.nome is string
+        && request.resource.data.nome.size() > 0
+        && request.resource.data.cognome is string
+        && request.resource.data.cognome.size() > 0;
+
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.data.id == resource.data.id
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.nome == resource.data.nome
+        && request.resource.data.cognome == resource.data.cognome
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly([
+            'ultimoAccesso', 'ultimoLogout', 'indirizzo', 'cap', 'citta',
+            'provincia', 'stato', 'numeroTelefono'
+          ])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['ultimoAccesso'])
+          || request.resource.data.ultimoAccesso == request.time)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['ultimoLogout'])
+          || request.resource.data.ultimoLogout == request.time)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['indirizzo'])
+          || request.resource.data.indirizzo is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['cap'])
+          || request.resource.data.cap is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['citta'])
+          || request.resource.data.citta is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['provincia'])
+          || request.resource.data.provincia is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['stato'])
+          || request.resource.data.stato is string)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['numeroTelefono'])
+          || request.resource.data.numeroTelefono is string);
+
+      allow delete: if false;
+    }
   }
 }

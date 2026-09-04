@@ -14,12 +14,21 @@
       </form>
 
       <div class="navbar-actions" aria-label="Azioni utente">
-        <a class="action-link" routerLink="/profilo" routerLinkActive="active" aria-label="Profilo utente">
-          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.52 0-10 2.24-10 5v3h20v-3c0-2.76-4.48-5-10-5Z" />
-          </svg>
-          <span class="action-label">Profilo</span>
-        </a>
+        <!-- @if (authService.user()) {
+          <button class="action-link action-button" type="button" aria-label="Esci dal profilo" (click)="logout()">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.52 0-10 2.24-10 5v3h20v-3c0-2.76-4.48-5-10-5Z" />
+            </svg>
+            <span class="action-label">Logout</span>
+          </button>
+        } @else { -->
+          <a class="action-link" routerLink="/profilo" routerLinkActive="active" aria-label="Accedi o registrati">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.52 0-10 2.24-10 5v3h20v-3c0-2.76-4.48-5-10-5Z" />
+            </svg>
+            <span class="action-label">Profilo</span>
+          </a>
+        <!-- } -->
 
         <a class="action-link cart-link" routerLink="/carrello" routerLinkActive="active" aria-label="Carrello">
           <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
