@@ -37,9 +37,132 @@ p {
   margin-top: 0;
 }
 
-.empty-state {
+.profile-card,
+.auth-card {
+  width: min(100%, 520px);
+  margin-inline: auto;
   padding: 2rem;
   border: 1px solid #dee2e6;
   border-radius: 0.75rem;
   background: #fff;
+}
+
+.profile-card + .profile-card {
+  margin-top: 2rem;
+}
+
+.address-card {
+  display: grid;
+  gap: 0.75rem;
+
+  label {
+    font-weight: 600;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #adb5bd;
+    border-radius: 0.375rem;
+
+    &:focus {
+      border-color: #ff4f0a;
+      outline: 3px solid rgb(255 79 10 / 20%);
+    }
+  }
+}
+
+.auth-card {
+  display: grid;
+  gap: 0.75rem;
+
+  label {
+    font-weight: 600;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid #adb5bd;
+    border-radius: 0.375rem;
+
+    &:focus {
+      border-color: #ff4f0a;
+      outline: 3px solid rgb(255 79 10 / 20%);
+    }
+  }
+}
+
+.primary-button {
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ff4f0a;
+  border-radius: 0.375rem;
+  background: #ff4f0a;
+  color: #fff;
+  font-weight: 700;
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+}
+
+.name-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  div {
+    display: grid;
+    gap: 0.75rem;
+  }
+}
+
+.address-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  div {
+    display: grid;
+    gap: 0.75rem;
+  }
+}
+
+.mode-button {
+  border: 0;
+  background: transparent;
+  color: #b63807;
+  text-decoration: underline;
+}
+
+.form-message {
+  margin: 0.25rem 0 0;
+  padding: 0.7rem;
+  border-radius: 0.375rem;
+}
+
+.form-message--error {
+  background: #f8d7da;
+  color: #842029;
+}
+
+.form-message--success {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.profile-description {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 575.98px) {
+  .name-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .address-fields {
+    grid-template-columns: 1fr;
+  }
 }

@@ -3,12 +3,129 @@
     <span class="page-icon" aria-hidden="true">&#128100;</span>
     <div>
       <p class="eyebrow">Area personale</p>
-      <h1>Il tuo profilo</h1>
+      <h1>{{ authService.user() ? 'Il tuo profilo' : (registerMode ? 'Registrati' : 'Accedi') }}</h1>
     </div>
   </div>
 
-  <div class="empty-state">
-    <h2>Benvenuto in Game Again</h2>
-    <p>Da qui potrai gestire i tuoi dati, gli indirizzi e lo storico degli ordini.</p>
-  </div>
+  @if (authService.user(); as user) {
+    <div class="profile-card">
+      <h2>Ciao {{ authService.userProfile()?.nome ?? 'utente' }} !</h2>
+      <p class="profile-description">Da qui potrai gestire i tuoi dati, gli indirizzi e lo storico degli ordini.</p>
+      <p>Email: <strong>{{ user.email }}</strong></p>
+      <p>Nome: <strong>{{ authService.userProfile()?.nome }}</strong></p>
+      <p>Cognome: <strong>{{ authService.userProfile()?.cognome }}</strong></p>
+      <button class="primary-button" type="button" (click)="logout()">Esci dal profilo</button>
+    </div>
+
+    <!--  -->
+    <!--  -->
+    <!--  -->
+  <form class="profile-card address-card" (ngSubmit)="saveAddress()">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Indirizzo
+          </button>
+        </h2>
+        
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>Qui potrai inserire il tuo indirizzo di consegna.</strong>
+          </div>
+
+          
+            <!-- <h2>Indirizzi</h2>
+            <p class="profile-description">Qui potrai inserire il tuo indirizzo di consegna.</p> -->
+            <label for="delivery-address">Indirizzo</label>
+            <input id="delivery-address" name="indirizzo" type="text" [(ngModel)]="address.indirizzo" autocomplete="street-address" required>
+
+            <div class="address-fields">
+              <div>
+                <label for="delivery-postal-code">CAP</label>
+                <input id="delivery-postal-code" name="cap" type="text" [(ngModel)]="address.cap" autocomplete="postal-code" required>
+              </div>
+              <div>
+                <label for="delivery-city">Città</label>
+                <input id="delivery-city" name="citta" type="text" [(ngModel)]="address.citta" autocomplete="address-level2" required>
+              </div>
+            </div>
+
+            <div class="address-fields">
+              <div>
+                <label for="delivery-province">Provincia</label>
+                <input id="delivery-province" name="provincia" type="text" [(ngModel)]="address.provincia" autocomplete="address-level1" required>
+              </div>
+              <div>
+                <label for="delivery-country">Stato</label>
+                <input id="delivery-country" name="stato" type="text" [(ngModel)]="address.stato" autocomplete="country-name" required>
+              </div>
+            </div>
+
+            <label for="delivery-phone">Numero telefono</label>
+            <input id="delivery-phone" name="numeroTelefono" type="tel" [(ngModel)]="address.numeroTelefono" autocomplete="tel" required>
+
+            @if (addressErrorMessage) {
+              <p class="form-message form-message--error" role="alert">{{ addressErrorMessage }}</p>
+            }
+            @if (addressSuccessMessage) {
+              <p class="form-message form-message--success" role="status">{{ addressSuccessMessage }}</p>
+            }
+            <button class="primary-button" type="submit" [disabled]="addressLoading">
+              {{ addressLoading ? 'Salvataggio...' : 'Salva indirizzo' }}
+            </button>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+    <!--  -->
+    <!--  -->
+    <!--  -->
+  } @else {
+    <form class="auth-card" (ngSubmit)="submit()">
+      <h2>{{ registerMode ? 'Crea il tuo account' : 'Bentornato' }}</h2>
+      <p>{{ registerMode ? 'Inserisci i tuoi dati per registrarti.' : 'Inserisci le credenziali per accedere.' }}</p>
+
+      @if (registerMode) {
+        <div class="name-fields">
+          <div>
+            <label for="auth-first-name">Nome</label>
+            <input id="auth-first-name" name="firstName" type="text" [(ngModel)]="firstName" autocomplete="given-name" required>
+          </div>
+          <div>
+            <label for="auth-last-name">Cognome</label>
+            <input id="auth-last-name" name="lastName" type="text" [(ngModel)]="lastName" autocomplete="family-name" required>
+          </div>
+        </div>
+      }
+
+      <label for="auth-email">Email</label>
+      <input id="auth-email" name="email" type="email" [(ngModel)]="email" autocomplete="email" placeholder="nome@esempio.it" required>
+
+      <label for="auth-password">Password</label>
+      <input id="auth-password" name="password" type="password" [(ngModel)]="password" [attr.autocomplete]="registerMode ? 'new-password' : 'current-password'" minlength="6" placeholder="Almeno 6 caratteri" required>
+
+      @if (errorMessage) {
+        <p class="form-message form-message--error" role="alert">{{ errorMessage }}</p>
+      }
+      @if (statusMessage) {
+        <p class="form-message" role="status" aria-live="polite">{{ statusMessage }}</p>
+      }
+      @if (successMessage) {
+        <p class="form-message form-message--success" role="status">{{ successMessage }}</p>
+      }
+
+      <button class="primary-button" type="submit" [disabled]="loading">
+        {{ loading ? 'Attendi...' : (registerMode ? 'Registrati' : 'Accedi') }}
+      </button>
+
+      <button class="mode-button" type="button" (click)="switchMode()">
+        {{ registerMode ? 'Hai già un account? Accedi' : 'Non hai un account? Registrati' }}
+      </button>
+    </form>
+  }
+
 </section>
