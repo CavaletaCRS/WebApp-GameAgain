@@ -11,10 +11,11 @@ service cloud.firestore {
       allow create: if request.auth != null
         && request.auth.uid == userId
         && request.resource.data.keys().hasOnly([
-          'id', 'email', 'nome', 'cognome', 'createdAt', 'ultimoAccesso'
+          'id', 'email', 'nome', 'cognome', 'verified', 'createdAt', 'ultimoAccesso'
         ])
         && request.resource.data.id == request.auth.uid
         && request.resource.data.email == request.auth.token.email
+        && request.resource.data.verified == false
         && request.resource.data.createdAt == request.time
         && request.resource.data.ultimoAccesso == request.time
         && request.resource.data.nome is string
@@ -22,9 +23,12 @@ service cloud.firestore {
         && request.resource.data.cognome is string
         && request.resource.data.cognome.size() > 0;
 
-      allow read: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true;
       allow update: if request.auth != null
         && request.auth.uid == userId
+        && request.auth.token.email_verified == true
         && request.resource.data.id == resource.data.id
         && request.resource.data.email == resource.data.email
         && request.resource.data.nome == resource.data.nome
@@ -33,8 +37,13 @@ service cloud.firestore {
         && request.resource.data.diff(resource.data).affectedKeys()
           .hasOnly([
             'ultimoAccesso', 'ultimoLogout', 'indirizzo', 'cap', 'citta',
-            'provincia', 'stato', 'numeroTelefono'
+            'provincia', 'stato', 'numeroTelefono', 'verified'
           ])
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['verified'])
+          || (
+            (!resource.data.keys().hasAll(['verified']) || resource.data.verified == false)
+            && request.resource.data.verified == true
+          ))
         && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['ultimoAccesso'])
           || request.resource.data.ultimoAccesso == request.time)
         && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['ultimoLogout'])
@@ -51,6 +60,23 @@ service cloud.firestore {
           || request.resource.data.stato is string)
         && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['numeroTelefono'])
           || request.resource.data.numeroTelefono is string);
+
+      allow delete: if false;
+    }
+
+    match /users/{userId}/cart/{cartId} {
+      allow read: if request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true;
+
+      allow create, update: if request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true
+        && cartId == 'current'
+        && request.resource.data.keys().hasOnly(['items', 'updatedAt'])
+        && request.resource.data.items is list
+        && request.resource.data.items.size() <= 100
+        && request.resource.data.updatedAt == request.time;
 
       allow delete: if false;
     }
