@@ -14,11 +14,15 @@ export class Profilo {
   lastName = '';
   email = '';
   password = '';
+  confirmPassword = '';
+  showPassword = false;
+  showConfirmPassword = false;
   registerMode = false;
   loading = false;
   errorMessage = '';
   successMessage = '';
   statusMessage = '';
+  registrationAttempted = false;
   addressLoading = false;
   addressSuccessMessage = '';
   addressErrorMessage = '';
@@ -45,6 +49,22 @@ export class Profilo {
 
   async submit(): Promise<void> {
     if (this.loading) return;
+
+    this.registrationAttempted = this.registerMode;
+    if (this.registerMode && !this.hasCompletedRegistrationFields()) {
+      this.errorMessage = 'Campi obbligatori.';
+      this.successMessage = '';
+      return;
+    }
+
+    if (this.registerMode && this.password !== this.confirmPassword) {
+      this.errorMessage = 'Le password non coincidono.';
+      this.successMessage = '';
+      return;
+    }
+
+    this.registrationAttempted = false;
+
     this.loading = true;
     this.errorMessage = '';
     this.successMessage = '';
@@ -52,18 +72,25 @@ export class Profilo {
 
     try {
       if (this.registerMode) {
-        await this.authService.register(
+        const verificationEmailSent = await this.authService.register(
           this.email.trim().toLowerCase(),
           this.password,
           this.firstName.trim(),
           this.lastName.trim(),
         );
-        this.successMessage = 'Registrazione completata con successo.';
+        this.successMessage = verificationEmailSent
+          ? 'Registrazione completata. Controlla la tua email per attivare il profilo.'
+          : 'Registrazione completata, ma non è stato possibile inviare l’email di verifica. Riprova più tardi.';
+        this.registerMode = false;
+        this.firstName = '';
+        this.lastName = '';
+        this.registrationAttempted = false;
       } else {
         await this.authService.login(this.email.trim(), this.password);
         this.successMessage = 'Accesso effettuato con successo.';
       }
       this.password = '';
+      this.confirmPassword = '';
     } catch (error) {
       this.errorMessage = this.getErrorMessage(error);
     } finally {
@@ -112,8 +139,12 @@ export class Profilo {
     this.errorMessage = '';
     this.successMessage = '';
     this.password = '';
+    this.confirmPassword = '';
+    this.showPassword = false;
+    this.showConfirmPassword = false;
     this.firstName = '';
     this.lastName = '';
+    this.registrationAttempted = false;
   }
 
   private getErrorMessage(error: unknown): string {
@@ -129,6 +160,7 @@ export class Profilo {
       'auth/too-many-requests': 'Troppi tentativi. Attendi qualche minuto e riprova.',
       'auth/network-request-failed': 'Errore di rete. Controlla la connessione e riprova.',
       'auth/operation-not-allowed': 'L’accesso con email e password non è ancora abilitato su Firebase.',
+      'auth/email-not-verified': 'Conferma la tua email prima di accedere al profilo.',
       'permission-denied': 'Non è stato possibile salvare il profilo. Verifica le regole di Firestore.',
     };
     return messages[code] ?? 'Si è verificato un errore. Riprova.';
@@ -136,5 +168,15 @@ export class Profilo {
 
   private emptyAddress(): UserAddress {
     return { indirizzo: '', cap: '', citta: '', provincia: '', stato: '', numeroTelefono: '' };
+  }
+
+  private hasCompletedRegistrationFields(): boolean {
+    return Boolean(
+      this.firstName.trim()
+      && this.lastName.trim()
+      && this.email.trim()
+      && this.password
+      && this.confirmPassword,
+    );
   }
 }

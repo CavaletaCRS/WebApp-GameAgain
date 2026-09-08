@@ -153,6 +153,31 @@ p {
   color: #0f5132;
 }
 
+.input-error {
+  border-color: #dc3545 !important;
+  outline: 3px solid rgb(220 53 69 / 16%);
+}
+
+.password-field {
+  position: relative;
+
+  input {
+    padding-right: 5.5rem;
+  }
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border: 0;
+  background: transparent;
+  color: #b63807;
+  font-size: 1.15rem;
+  transform: translateY(-50%);
+}
+
 .profile-description {
   margin-top: 1.5rem;
 }

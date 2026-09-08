@@ -85,7 +85,7 @@
     <!--  -->
     <!--  -->
   } @else {
-    <form class="auth-card" (ngSubmit)="submit()">
+    <form class="auth-card" (ngSubmit)="submit()" novalidate>
       <h2>{{ registerMode ? 'Crea il tuo account' : 'Bentornato' }}</h2>
       <p>{{ registerMode ? 'Inserisci i tuoi dati per registrarti.' : 'Inserisci le credenziali per accedere.' }}</p>
 
@@ -93,20 +93,35 @@
         <div class="name-fields">
           <div>
             <label for="auth-first-name">Nome</label>
-            <input id="auth-first-name" name="firstName" type="text" [(ngModel)]="firstName" autocomplete="given-name" required>
+            <input id="auth-first-name" name="firstName" type="text" [(ngModel)]="firstName" autocomplete="given-name" [class.input-error]="registrationAttempted && !firstName.trim()" required>
           </div>
           <div>
             <label for="auth-last-name">Cognome</label>
-            <input id="auth-last-name" name="lastName" type="text" [(ngModel)]="lastName" autocomplete="family-name" required>
+            <input id="auth-last-name" name="lastName" type="text" [(ngModel)]="lastName" autocomplete="family-name" [class.input-error]="registrationAttempted && !lastName.trim()" required>
           </div>
         </div>
       }
 
       <label for="auth-email">Email</label>
-      <input id="auth-email" name="email" type="email" [(ngModel)]="email" autocomplete="email" placeholder="nome@esempio.it" required>
+      <input id="auth-email" name="email" type="email" [(ngModel)]="email" autocomplete="email" placeholder="nome@esempio.it" [class.input-error]="registrationAttempted && !email.trim()" required>
 
       <label for="auth-password">Password</label>
-      <input id="auth-password" name="password" type="password" [(ngModel)]="password" [attr.autocomplete]="registerMode ? 'new-password' : 'current-password'" minlength="6" placeholder="Almeno 6 caratteri" required>
+      <div class="password-field">
+        <input id="auth-password" name="password" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" [attr.autocomplete]="registerMode ? 'new-password' : 'current-password'" minlength="6" placeholder="Almeno 6 caratteri" [class.input-error]="registrationAttempted && (!password || (registerMode && password !== confirmPassword))" required>
+        <button class="password-toggle" type="button" (click)="showPassword = !showPassword" [attr.aria-label]="showPassword ? 'Nascondi password' : 'Mostra password'" [attr.aria-pressed]="showPassword">
+          <i [class]="showPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      @if (registerMode) {
+        <label for="auth-confirm-password">Ripeti password</label>
+        <div class="password-field">
+          <input id="auth-confirm-password" name="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" [(ngModel)]="confirmPassword" autocomplete="new-password" minlength="6" placeholder="Ripeti la password" [class.input-error]="registrationAttempted && (!confirmPassword || password !== confirmPassword)" required>
+          <button class="password-toggle" type="button" (click)="showConfirmPassword = !showConfirmPassword" [attr.aria-label]="showConfirmPassword ? 'Nascondi password ripetuta' : 'Mostra password ripetuta'" [attr.aria-pressed]="showConfirmPassword">
+            <i [class]="showConfirmPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" aria-hidden="true"></i>
+          </button>
+        </div>
+      }
 
       @if (errorMessage) {
         <p class="form-message form-message--error" role="alert">{{ errorMessage }}</p>
