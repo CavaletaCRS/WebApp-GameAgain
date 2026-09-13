@@ -14,22 +14,29 @@
   } @else {
     <div class="cart-layout">
       <div class="cart-list" aria-label="Prodotti nel carrello">
-        @for (item of cartService.items(); track item.key) {
+        @for (item of visibleItems(); track item.key) {
           <article class="cart-item">
             <img [src]="item.image" [alt]="'Immagine di ' + item.title">
             <div class="cart-item__details">
               <h2>{{ item.title }}</h2>
               <p>{{ item.condition }}</p>
               <strong>{{ item.unitPrice | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+              <div class="quantity" role="group" [attr.aria-label]="'Quantità di ' + item.title">
+                <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity - 1)" [disabled]="item.quantity <= 1" [attr.aria-label]="'Riduci quantità di ' + item.title">&minus;</button>
+                <span aria-live="polite">Quantità: {{ item.quantity }}</span>
+                <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity + 1)" [attr.aria-label]="'Aumenta quantità di ' + item.title">&plus;</button>
+              </div>
             </div>
-            <!-- <div class="quantity" aria-label="Quantità">
-              <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity - 1)" [attr.aria-label]="'Riduci quantità di ' + item.title">&minus;</button>
-              <span>{{ item.quantity }}</span>
-              <button type="button" (click)="cartService.updateQuantity(item.key, item.quantity + 1)" [attr.aria-label]="'Aumenta quantità di ' + item.title">&plus;</button>
-            </div> -->
             <strong class="item-total">{{ item.unitPrice * item.quantity | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
             <button class="remove-button" type="button" (click)="cartService.remove(item.key)">Rimuovi</button>
           </article>
+        }
+        @if (pageCount() > 1) {
+          <nav class="cart-pagination" aria-label="Pagine del carrello">
+            <button type="button" (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1">Precedente</button>
+            <span role="status" aria-live="polite">Pagina {{ currentPage() }} di {{ pageCount() }}</span>
+            <button type="button" (click)="changePage(currentPage() + 1)" [disabled]="currentPage() === pageCount()">Successiva</button>
+          </nav>
         }
       </div>
 
@@ -40,8 +47,8 @@
           <span>Totale</span>
           <strong>{{ cartService.total() | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
         </div>
-        <button class="checkout-button" type="button">Procedi all'acquisto</button>
-        <button class="clear-button" type="button" (click)="cartService.clear()">Svuota il carrello</button>
+        <button class="checkout-button" type="button" routerLink="/carrello/checkout">Procedi all'acquisto</button>
+        <button class="clear-button" type="button" (click)="clearCart()">Svuota il carrello</button>
       </aside>
     </div>
   }

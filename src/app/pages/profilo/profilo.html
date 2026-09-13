@@ -137,6 +137,10 @@
         {{ loading ? 'Attendi...' : (registerMode ? 'Registrati' : 'Accedi') }}
       </button>
 
+      @if (!registerMode) {
+        <a class="mode-button text-center" routerLink="/recupera-password">Password dimenticata?</a>
+      }
+
       <button class="mode-button" type="button" (click)="switchMode()">
         {{ registerMode ? 'Hai già un account? Accedi' : 'Non hai un account? Registrati' }}
       </button>

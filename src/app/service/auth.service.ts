@@ -6,6 +6,7 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
@@ -107,6 +108,10 @@ export class AuthService {
       { verified: true, ultimoAccesso: serverTimestamp() },
       { merge: true },
     );
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    await sendPasswordResetEmail(this.auth, email);
   }
 
   async logout(): Promise<void> {

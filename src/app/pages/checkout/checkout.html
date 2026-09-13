@@ -1,0 +1,57 @@
+<section class="page-shell">
+  <p class="eyebrow">I tuoi acquisti</p>
+  <h1>Riepilogo e spedizione</h1>
+  <a class="back-link" routerLink="/carrello">Torna al carrello</a>
+
+  @if (cartService.items().length === 0) {
+    <div class="card empty-state">
+      <h2>Il carrello è vuoto</h2>
+      <p>Aggiungi un prodotto per procedere all’acquisto.</p>
+      <a routerLink="/giochi">Esplora i giochi</a>
+    </div>
+  } @else {
+    <div class="card recap">
+      <h2>Il tuo carrello</h2>
+      @for (item of cartService.items(); track item.key) {
+        <article class="recap-item">
+          <img [src]="item.image" [alt]="item.title">
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.condition }} · Quantità: {{ item.quantity }}</p>
+            <p>Prezzo unitario: {{ item.unitPrice | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</p>
+          </div>
+          <strong>{{ item.unitPrice * item.quantity | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+        </article>
+      }
+      <div class="total">
+        <span>Totale prodotti ({{ cartService.itemCount() }})</span>
+        <strong>{{ cartService.total() | currency:'EUR':'symbol':'1.2-2':'it-IT' }}</strong>
+      </div>
+    </div>
+
+    <form class="card shipping" #shippingForm="ngForm" (ngSubmit)="completeOrder(shippingForm, purchasePopup)" novalidate>
+      <h2>Informazioni di spedizione</h2>
+      <p>Controlla i dati e conferma l’indirizzo di consegna.</p>
+      <div class="fields">
+        <div><label for="shipping-name">Nome</label><input id="shipping-name" name="nome" autocomplete="given-name" [(ngModel)]="shipping().nome" (ngModelChange)="addressChanged()" required></div>
+        <div><label for="shipping-surname">Cognome</label><input id="shipping-surname" name="cognome" autocomplete="family-name" [(ngModel)]="shipping().cognome" (ngModelChange)="addressChanged()" required></div>
+        <div class="full-width"><label for="shipping-address">Indirizzo e numero civico</label><input id="shipping-address" name="indirizzo" autocomplete="street-address" [(ngModel)]="shipping().indirizzo" (ngModelChange)="addressChanged()" required></div>
+        <div><label for="shipping-postcode">CAP</label><input id="shipping-postcode" name="cap" autocomplete="postal-code" [(ngModel)]="shipping().cap" (ngModelChange)="addressChanged()" required></div>
+        <div><label for="shipping-city">Città</label><input id="shipping-city" name="citta" autocomplete="address-level2" [(ngModel)]="shipping().citta" (ngModelChange)="addressChanged()" required></div>
+        <div><label for="shipping-province">Provincia</label><input id="shipping-province" name="provincia" autocomplete="address-level1" [(ngModel)]="shipping().provincia" (ngModelChange)="addressChanged()" required></div>
+        <div><label for="shipping-country">Stato</label><input id="shipping-country" name="stato" autocomplete="country-name" [(ngModel)]="shipping().stato" (ngModelChange)="addressChanged()" required></div>
+        <div class="full-width"><label for="shipping-phone">Numero di telefono</label><input id="shipping-phone" name="numeroTelefono" type="tel" autocomplete="tel" [(ngModel)]="shipping().numeroTelefono" (ngModelChange)="addressChanged()" required></div>
+      </div>
+      <label class="confirmation"><input type="checkbox" name="confirmed" [(ngModel)]="confirmed" required> Confermo che l’indirizzo di spedizione è corretto.</label>
+      @if (errorMessage()) {
+        <p class="error-message" role="alert">{{ errorMessage() }}</p>
+      }
+      <button class="primary-button" type="submit">Completa l’ordine</button>
+    </form>
+  }
+</section>
+
+<dialog #purchasePopup aria-labelledby="purchase-message">
+  <p id="purchase-message">Grazie per il suo acquisto! ATTENZIONE QUESTA È UNA VERSIONE DI PROVA NON SARÀ ACQUISTATO NÉ INVIATO NULLA</p>
+  <button class="primary-button" type="button" (click)="purchasePopup.close()" autofocus>Chiudi</button>
+</dialog>

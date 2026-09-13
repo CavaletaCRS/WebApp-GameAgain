@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AuthError } from 'firebase/auth';
 import { AuthService, UserAddress } from '../../service/auth.service';
 
 @Component({
   selector: 'app-profilo',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './profilo.html',
   styleUrl: './profilo.scss',
 })
