@@ -146,10 +146,16 @@ export const routes: Routes = [
       import('./pages/profilo/profilo').then((component) => component.Profilo),
   },
   {
-    path: 'carrello',
-    title: 'Carrello - Game Again',
+    path: 'recupera-password',
+    title: 'Recupera password - Game Again',
     loadComponent: () =>
-      import('./pages/carrello/carrello').then((component) => component.Carrello),
+      import('./pages/recupera-password/recupera-password').then(
+        (component) => component.RecuperaPassword,
+      ),
+  },
+  {
+    path: 'carrello',
+    loadChildren: () => import('./pages/carrello/carrello.routes'),
   },
   {
     path: '**',
