@@ -8,12 +8,15 @@
         <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
       </a>
       <!-- Tasto di ricerca -->
-      <form class="d-flex desktop-search" role="search" (ngSubmit)="search(desktopSearch.value)">
+      <form id="header-search" class="desktop-search" [class.search-open]="mobileSearchOpen" role="search" (ngSubmit)="search(desktopSearch.value)" (keydown.escape)="mobileSearchOpen = false; searchToggle.focus()">
         <input #desktopSearch class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca prodotti" required/>
         <button class="btn btn-success" type="submit">Cerca</button>
       </form>
 
       <div class="navbar-actions" aria-label="Azioni utente">
+        <button #searchToggle class="action-link action-button d-md-none" type="button" aria-label="Apri o chiudi la ricerca" aria-controls="header-search" [attr.aria-expanded]="mobileSearchOpen" (click)="toggleSearch(desktopSearch)">
+          <i class="bi bi-search fs-4" aria-hidden="true"></i>
+        </button>
         <!-- @if (authService.user()) {
           <button class="action-link action-button" type="button" aria-label="Esci dal profilo" (click)="logout()">
             <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -59,16 +62,16 @@
         </div>
       </div>
 
-      <div class="offcanvas offcanvas-top text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas offcanvas-top text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasDarkNavbar" aria-label="Categorie">
         
         <div class="offcanvas-header">
            <img src="img/imgLogo - Modificata.png" alt="Logo Game Again" class="logo" />
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Chiudi categorie"></button>
         </div>
 
         <div class="offcanvas-body">
 
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <ul class="navbar-nav category-grid">
 
             <li class="nav-item">
               <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas">Home</a>
@@ -109,12 +112,12 @@
             </li>
 
             <!-- Dropdown Carte collezionabili -->
-            <!-- <li class="nav-item dropdown">
+            <!-- <li class="nav-item">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Carte collezionabili
               </a>
 
-              <ul class="dropdown-menu dropdown-menu-dark">
+              <ul class="category-links">
 
                 <li><a class="dropdown-item" routerLink="/carte-collezionabili/pokemon" routerLinkActive="active" data-bs-dismiss="offcanvas">Pokemon</a></li>
                 <li><a class="dropdown-item" routerLink="/carte-collezionabili/varie" routerLinkActive="active" data-bs-dismiss="offcanvas">Varie</a></li>
@@ -131,10 +134,6 @@
             </li>
           </ul>
 
-          <form class="d-flex mt-3" role="search" (ngSubmit)="search(mobileSearch.value)">
-            <input #mobileSearch class="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca prodotti" required>
-            <button class="btn btn-success" type="submit" data-bs-dismiss="offcanvas">Cerca</button>
-          </form>
 
         </div>
       </div>

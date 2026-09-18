@@ -38,6 +38,7 @@ form {
 }
 
 .desktop-search {
+  display: flex;
   width: 100%;
   margin: 0;
   justify-self: center;
@@ -143,34 +144,10 @@ form {
   color: #198754;
 }
 
-.offcanvas-search {
-  width: fit-content;
-  max-width: 100%;
-  margin-left: 0;
-
-  .form-control {
-    width: min(220px, 55vw);
-  }
-
-  .btn {
-    flex: 0 0 auto;
-    width: auto;
-  }
-}
-
 .header {
   width: min(100% - 2rem, 1400px);
   margin-inline: auto;
 
-  h1 {
-    margin: 0 0 1rem;
-    font-size: clamp(2rem, 7vw, 4rem);
-  }
-
-  p {
-    max-width: 650px;
-    line-height: 1.6;
-  }
 }
 
 .navbar > .category-navigation {
@@ -201,19 +178,6 @@ form {
   gap: 0.5rem;
 }
 
-.navigation-search {
-  width: min(100%, 420px);
-  margin-inline: auto;
-
-  .form-control {
-    min-width: 0;
-  }
-
-  .btn {
-    flex: 0 0 auto;
-  }
-}
-
 .category-button {
   display: inline-flex;
   align-items: center;
@@ -230,26 +194,60 @@ form {
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     transform 0.15s ease-in-out;
 
-  &:hover,
-  &:focus-visible,
-  &.active {
-    border-color: #FF4F0A;
-    background-color: #FF4F0A;
-    color: #fff;
-  }
-
   &:active {
     transform: translateY(1px);
   }
 }
 
+.offcanvas-top {
+  height: auto;
+  max-height: 100dvh;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 1rem;
+}
+
+.category-grid .dropdown-menu {
+  min-width: 0;
+}
+
+.offcanvas .nav-link,
+.category-grid .dropdown-item {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding: 0.6rem;
+}
+
+@media (min-width: 992px) {
+  .offcanvas-top {
+    width: 25%;
+    right: auto;
+  }
+
+  .category-grid {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 767.98px) {
   .navbar-main {
-    grid-template-columns: auto minmax(120px, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 0.65rem;
   }
 
   .desktop-search {
+    display: none;
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    &.search-open {
+      display: flex;
+    }
+
     .form-control {
       min-width: 0;
     }
