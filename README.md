@@ -1,59 +1,59 @@
-# WebAppGameAgain
+# Game Again
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.2.
+Web application sviluppata con **Angular** per la visualizzazione e la vendita di videogiochi usati.
 
-## Development server
+Il progetto nasce come progetto personale con l'obiettivo di approfondire lo sviluppo frontend, la creazione di componenti riutilizzabili, la gestione dell'autenticazione e l'integrazione con servizi cloud.
 
-To start a local development server, run:
+L'applicazione è pubblicata online tramite **Firebase Hosting**.
 
-```bash
-ng serve
-```
+## Live Demo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+https://game-again-app.web.app/
 
-## Code scaffolding
+## Tecnologie
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular
+- TypeScript
+- HTML5
+- CSS
+- Firebase Authentication
+- Firebase / Firestore
+- Git / GitHub
 
-```bash
-ng generate component component-name
-```
+## Funzionalità
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Catalogo di videogiochi con dati caricati dinamicamente
+- Navigazione per categorie
+- Componenti Angular riutilizzabili
+- Recupero e gestione dei prodotti tramite Firestore
+- Gestione delle immagini tramite URL memorizzati nel database
+- Registrazione e autenticazione degli utenti
+- Verifica dell'indirizzo email tramite email di conferma
+- Recupero e reimpostazione della password
+- Carrello personale associato all'utente autenticato
+- Persistenza del carrello tramite subcollection Firestore dedicata all'utente
+- Layout responsive per desktop e mobile
+- Collegamenti esterni per l'acquisto dei prodotti
 
-```bash
-ng generate --help
-```
+## Architettura
 
-## Building
+I prodotti sono memorizzati singolarmente all'interno di una collection Firestore e recuperati dinamicamente dall'applicazione.
 
-To build the project run:
+Ogni prodotto contiene le informazioni necessarie alla visualizzazione, incluso il riferimento URL alla relativa immagine.
 
-```bash
-ng build
-```
+L'autenticazione è gestita tramite **Firebase Authentication**, con registrazione dell'utente, verifica dell'indirizzo email, login e recupero della password.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Per gli utenti autenticati, il carrello viene mantenuto durante l'utilizzo dell'applicazione e sincronizzato con Firestore tramite una subcollection associata all'utente, permettendo di conservarne il contenuto anche tra sessioni differenti.
 
-## Running unit tests
+La logica di accesso ai dati e di autenticazione è organizzata tramite service Angular, mantenendo separata la gestione dei dati dai componenti dell'interfaccia.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Stato del progetto
 
-```bash
-ng test
-```
+Il progetto è attualmente in sviluppo e viene utilizzato anche come ambiente di sperimentazione e approfondimento delle tecnologie utilizzate.
 
-## Running end-to-end tests
+Sono previste nuove funzionalità e ulteriori miglioramenti dell'interfaccia e dell'esperienza utente.
 
-For end-to-end (e2e) testing, run:
+## Autore
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Christian Raul Subelet**  
+Software Developer
