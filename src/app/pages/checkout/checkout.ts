@@ -43,7 +43,7 @@ export class Checkout {
   completeOrder(form: NgForm, popup: HTMLDialogElement): void {
     if (!this.cartService.items().length) return;
     if (form.invalid || Object.values(this.shipping()).some(value => !value.trim())) {
-      this.errorMessage.set('Compila tutti i dati di spedizione e conferma l’indirizzo.');
+      this.errorMessage.set('Controlla i dati di spedizione e clicca su conferma.');
       return;
     }
     if (!this.confirmed) {
