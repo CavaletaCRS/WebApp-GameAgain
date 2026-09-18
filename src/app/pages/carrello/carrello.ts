@@ -11,7 +11,7 @@ import { CartService } from '../../service/cart.service';
 })
 export class Carrello {
   readonly cartService = inject(CartService);
-  readonly pageSize = 15;
+  readonly pageSize = 10;
   readonly pageCount = computed(() => Math.max(1, Math.ceil(this.cartService.items().length / this.pageSize)));
   readonly currentPage = linkedSignal<number, number>({
     source: this.pageCount,
