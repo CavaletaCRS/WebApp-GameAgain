@@ -11,6 +11,13 @@ import { AuthService } from '../../../service/auth.service';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
+  mobileSearchOpen = false;
+
+  toggleSearch(input: HTMLInputElement): void {
+    this.mobileSearchOpen = !this.mobileSearchOpen;
+    if (this.mobileSearchOpen) setTimeout(() => input.focus());
+  }
+
   constructor(
     private readonly router: Router,
     readonly cartService: CartService,
@@ -26,6 +33,7 @@ export class Navbar {
     const query = value.trim();
     if (!query) return;
 
+    this.mobileSearchOpen = false;
     void this.router.navigate(['/cerca'], { queryParams: { q: query } });
   }
 }
