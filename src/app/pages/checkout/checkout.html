@@ -29,6 +29,11 @@
       </div>
     </div>
 
+    @if (!authService.user()) {
+      <fieldset class="card auth-notice" aria-label="Accesso richiesto">
+        Per procedere con l'acquisto fai <a routerLink="/profilo">log in</a> o <a routerLink="/profilo" [queryParams]="{ mode: 'register' }">registrati</a>.
+      </fieldset>
+    } @else {
     <form class="card shipping" #shippingForm="ngForm" (ngSubmit)="completeOrder(shippingForm, purchasePopup)" novalidate>
       <h2>Informazioni di spedizione</h2>
       <p>Controlla i dati e conferma l’indirizzo di consegna. (Clicca <a routerLink="/profilo">qui</a> per modificare l'indirizzo)</p>
@@ -48,6 +53,7 @@
       }
       <button class="primary-button" type="submit">Completa l’ordine</button>
     </form>
+    }
   }
 </section>
 

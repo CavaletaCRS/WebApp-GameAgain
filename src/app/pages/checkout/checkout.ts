@@ -13,7 +13,7 @@ import { CartService } from '../../service/cart.service';
 })
 export class Checkout {
   readonly cartService = inject(CartService);
-  private readonly authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   readonly shipping = signal({
     nome: '', cognome: '', indirizzo: '', cap: '', citta: '',
     provincia: '', stato: 'Italia', numeroTelefono: '',

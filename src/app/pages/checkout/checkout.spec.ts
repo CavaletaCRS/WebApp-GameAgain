@@ -24,7 +24,7 @@ describe('Checkout demo', () => {
       imports: [Checkout],
       providers: [
         provideRouter([]),
-        { provide: AuthService, useValue: { userProfile: signal(profile) } },
+        { provide: AuthService, useValue: { user: signal({ uid: 'test-user' }), userProfile: signal(profile) } },
         { provide: CartService, useValue: { items, itemCount: () => 2, total: () => 40, clear } },
       ],
     });

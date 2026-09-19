@@ -5,6 +5,7 @@ h1 { margin-bottom: 1rem; }
 .back-link { display: inline-block; margin-bottom: 1.5rem; }
 a { color: #b63807; }
 .card { margin-bottom: 1.5rem; padding: 1.5rem; border: 1px solid #dee2e6; border-radius: 0.75rem; background: #fff; }
+.auth-notice { display: block; white-space: normal; }
 h2 { margin: 0 0 1rem; font-size: 1.4rem; }
 .recap-item { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding-block: 0.75rem; border-bottom: 1px solid #dee2e6; }
 .recap-item img { width: 56px; height: 56px; object-fit: contain; }

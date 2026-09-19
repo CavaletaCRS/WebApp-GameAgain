@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, effect } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AuthError } from 'firebase/auth';
 import { AuthService, UserAddress } from '../../service/auth.service';
 
@@ -32,7 +33,13 @@ export class Profilo {
   constructor(
     readonly authService: AuthService,
     private readonly changeDetector: ChangeDetectorRef,
-  ) {}
+    route: ActivatedRoute,
+  ) {
+    route.queryParamMap.pipe(takeUntilDestroyed()).subscribe(params => {
+      const registerMode = params.get('mode') === 'register';
+      if (this.registerMode !== registerMode) this.switchMode();
+    });
+  }
 
   private readonly syncAddressFromProfile = effect(() => {
     const profile = this.authService.userProfile();
